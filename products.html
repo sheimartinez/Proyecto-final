@@ -10,6 +10,8 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="cs/products.css" rel="stylesheet">
+  <link href="css/login.css" rel="stylesheet">
 </head>
 
 <body>
@@ -38,10 +40,33 @@
   </nav>
   <main class="pb-5 container">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <ul id="lista-productos"></ul>
+    <!-- mostrar el listado de productos utilizando fetch-->
+   <script>
+    fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
+      .then(response => response.json())
+      .then(data => {
+        const productos = data.products;
+        const lista = document.getElementById("lista-productos");
+
+        productos.forEach(producto => {
+          const item = document.createElement("li");
+          item.innerHTML = `
+            <strong>${producto.name}</strong>
+            ${producto.description}
+            Precio: ${producto.currency} ${producto.cost}
+            Vendidos: ${producto.soldCount}
+            <img src="${producto.image}" width="150">
+            <hr>
+          `;
+          lista.appendChild(item);
+        });
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  </script>
       </div>
-    </div>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -62,6 +87,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
+
 </body>
 
 </html>
