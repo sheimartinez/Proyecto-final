@@ -44,8 +44,32 @@
   </nav>
   <main class="pb-5 container">
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <ul id="lista-productos"></ul>
+    <!-- mostrar el listado de productos utilizando fetch-->
+   <script>
+    fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
+      .then(response => response.json())
+      .then(data => {
+        const productos = data.products;
+        const lista = document.getElementById("lista-productos");
+
+        productos.forEach(producto => {
+          const item = document.createElement("li");
+          item.innerHTML = `
+            <strong>${producto.name}</strong><br>
+            ${producto.description}<br>
+            Precio: ${producto.currency} ${producto.cost}<br>
+            Vendidos: ${producto.soldCount}<br>
+            <img src="${producto.image}" width="150">
+            <hr>
+          `;
+          lista.appendChild(item);
+        });
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+  </script>
       </div>
     </div>
   </main>
@@ -68,30 +92,7 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
-  <!-- mostrar el listado de productos utilizando fetch-->
-   <script>
-    fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
-      .then(response => response.json())
-      .then(data => {
-        const productos = data.products;
-        const lista = document.getElementById("lista-productos");
-
-        productos.forEach(producto => {
-          const item = document.createElement("li");
-          item.innerHTML = `
-            <strong>${producto.name}</strong><br>
-            ${producto.description}<br>
-            Precio: ${producto.currency} ${producto.cost}<br>
-            <img src="${producto.image}" width="150">
-            <hr>
-          `;
-          lista.appendChild(item);
-        });
-      })
-      .catch(error => {
-        console.error("Error:", error);
-      });
-  </script>
+  
 
 </body>
 
