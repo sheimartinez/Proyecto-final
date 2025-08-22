@@ -230,6 +230,7 @@ a.custom-card:hover {
   text-align: left;
 }
 
+
 .card-title {
   font-size: 18px;
   font-weight: bold;
@@ -250,7 +251,7 @@ a.custom-card:hover {
   color: #28a745;
   font-weight: bold;
   margin-top: auto;
-  text-align: right;
+  text-align: left;
 }
 
 .card-sold {
