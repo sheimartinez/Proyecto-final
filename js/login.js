@@ -1,17 +1,20 @@
 // declaramos las constantes para trabajar mejor //
 document.addEventListener("DOMContentLoaded", () => {
-const form = document.getElementById ('loginForm');
-const usuario = document.getElementById ('usuario');
-const password = document.getElementById('password');
-const boton = document.querySelector("form button[type='button']");
+    const form = document.getElementById('loginForm');
+    const usuario = document.getElementById('usuario');
+    const password = document.getElementById('password');
+    const boton = document.getElementById('boton');
 
-// Código para que al darle al botón nos redireccione a la portada 
-// y salte una alerta si los campos están vacíos //
-  boton.addEventListener("click", function () {
-    if (usuario.value === "" || password.value === "") {
-      alert("Inválido");
-    } else {
-      window.location.href = "index.html";
-    }
-  })
+ 
+    boton.addEventListener("click", (e) => {
+        e.preventDefault(); 
+
+        if (usuario.value === "" || password.value === "") {
+            alert("Inválido");
+        } else {
+            localStorage.setItem("usuarioLogeado", usuario.value); // esta parte me re complico porue era lo que faltaba para ir al index.html nuevamente
+
+            window.location.href = "index.html";
+        }
+    });
 });

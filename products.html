@@ -12,7 +12,6 @@
   <link href="css/styles.css" rel="stylesheet">
   <link href="cs/products.css" rel="stylesheet">
 </head>
-
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
     <div class="container">
@@ -38,32 +37,36 @@
     </div>
   </nav>
   <main class="pb-5 container">
-    <div class="container">
-      <ul id="lista-productos"></ul>
+   <div id="lista-productos" class="card-container">
+
     <!-- mostrar el listado de productos utilizando fetch-->
    <script>
-    fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
+     fetch('https://japceibal.github.io/emercado-api/cats_products/101.json')
       .then(response => response.json())
       .then(data => {
         const productos = data.products;
-        const lista = document.getElementById("lista-productos");
+        const contenedor = document.getElementById("lista-productos");
 
         productos.forEach(producto => {
-          const item = document.createElement("li");
-          item.innerHTML = `
-            <strong>${producto.name}</strong>
-            ${producto.description}
-            Precio: ${producto.currency} ${producto.cost}
-            Vendidos: ${producto.soldCount}
-            <img src="${producto.image}" width="150">
-            <hr>
-          `;
-          lista.appendChild(item);
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML =  `
+       <img src="${producto.image}" alt="${producto.name}" class="card-img">
+       <div class="card-info">
+       <h3 class="card-title">${producto.name}</h3>
+       <p class="card-description">${producto.description}</p>
+       <p class="card-price">${producto.currency} ${producto.cost}</p>
+       <p class="card-sold">Cantidad de vendidos: ${producto.soldCount}<br>
+       </p>
+       </div>
+       `;
+       contenedor.appendChild(card)
         });
       })
       .catch(error => {
         console.error("Error:", error);
       });
+
   </script>
       </div>
   </main>
@@ -86,6 +89,8 @@
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
+  
+
 </body>
 
 </html>

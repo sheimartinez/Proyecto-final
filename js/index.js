@@ -12,3 +12,14 @@ document.addEventListener("DOMContentLoaded", function(){
         window.location = "products.html"
     });
 });
+
+// ACA CREAMOS LA PARTE DE DESAFIATE PARA QUE CUANDO ENTRES AL INDEX TE REDIRIJA AL LOGIN SI NO ESTAS REGISTRADO
+
+ const usuarioLogeado = localStorage.getItem("usuarioLogeado");
+
+    if (!usuarioLogeado) {
+        window.location.href = "login.html"; 
+    } else {
+        console.log("Bienvenido " + usuarioLogeado);
+    }
+
