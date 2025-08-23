@@ -1,3 +1,4 @@
+// declaramos las constantes para trabajar mejor //
 document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById('loginForm');
     const usuario = document.getElementById('usuario');
