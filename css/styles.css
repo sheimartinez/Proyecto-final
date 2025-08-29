@@ -257,3 +257,46 @@ a.custom-card:hover {
 .card-sold {
   font-size: 12px;
   color: #888;}
+
+/*Tablet vertical*/  
+
+  @media (min-width:481px) and (max-width: 1024px){
+#lista-productos {
+  justify-content: center;
+
+}
+#lista-productos .card {
+   width: 45%;
+}
+  }
+
+
+
+  /*Smartphone Pequeño (Ej. iPhone SE): 320 x 568 px*/
+  @media (max-width: 480px) 
+   {
+    #lista-productos {
+      justify-content: center;
+    }
+    #lista-productos .card {
+      width: 100%;
+    }
+  
+}
+  
+
+  /* Pantalla Estándar*/
+  @media (min-width:1025px) {
+#lista-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+justify-content: flex-start;
+  padding: 20px;
+}
+
+#lista-productos .card {
+  width: 30%;
+}
+
+}
