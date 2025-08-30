@@ -15,10 +15,24 @@
     body {
       background-color: rgb(248, 249, 250);
     }
+ .bg-img {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      z-index: -1;
+      background-color: rgb(248, 249, 250);
+    }
+
   </style>
 </head>
 
 <body>
+ <!--aca puse la imagen para que sea mas facil modificar el css-->
+  <img src="img/fondo_para_el_login_2.png" alt="Fondo" class="bg-img">
+
   <main class="mt-5">
     
     <!--En este Div pusimos todo lo que es campos para registrarnos-->
