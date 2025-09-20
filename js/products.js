@@ -12,7 +12,7 @@ function mostrarProductos(lista){
 
 lista.forEach((producto) => {
   contenido = contenido + `
-  <div class="card">
+  <div class="card" id="${producto.id}" style="cursor:pointer;">
   <img src="${producto.image}" class="card-img">
   <div class="card-info">
   <h3 class="card-title">${producto.name}</h3>
@@ -24,9 +24,19 @@ lista.forEach((producto) => {
   `;
 });
   contenedor.innerHTML = contenido;
+
+  //código de la pauta 4 entrega 3
+const tarjetas= Array.from(document.getElementsByClassName("card"));
+tarjetas.forEach(tarjeta => {
+  tarjeta.addEventListener("click",() => {
+    const seleccion= tarjeta.id;
+    localStorage.setItem("productoSeleccionado",seleccion);
+    window.location.href="product-info.html";
+  });
+});
 }
 
-const categoriaID = localStorage.getItem("catID")||101;
+const categoriaID = localStorage.getItem("catID");
 const urlProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`;
 
 getJSONData(urlProductos).then(function(resultado){
