@@ -10,7 +10,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
-  <link href="cs/products.css" rel="stylesheet">
+  <link href="css/products.css" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
@@ -37,12 +37,32 @@
       </div>
     </div>
   </nav>
-  <main class="pb-5 container">
-   <div id="lista-productos" class="card-container">
+ <main class="pb-5 container">
+  <!-- esta es la parte modificada para la entrega 3-->
+  <div class="filtros">
+    <h3>Filtrar por Precio</h3>
+    
+    <div class="rangos-precio">
+      <input type="number" id="minimo" placeholder="Precio mínimo" min="0">
+      <input type="number" id="maximo" placeholder="Precio máximo" min="0">
+      <button onclick="filtrarProductos()">Filtrar</button>
+      <button onclick="limpiarFiltros()">Limpiar</button>
+    </div>
+    
+    <div class="ordenar">
+      <label>Ordenar por:</label>
+      <select id="orden" onchange="ordenarProductos()">
+        <option value="precio-bajo">Precio: Menor a Mayor</option>
+        <option value="precio-alto">Precio: Mayor a Menor</option>
+        <option value="mas-vendidos">Más vendidos</option>
+      </select>
+    </div>
+  </div>
 
-   
-      </div>
-  </main>
+  <div id="lista-productos" class="card-container">
+ 
+  </div>
+</main>
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
