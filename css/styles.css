@@ -266,7 +266,7 @@ a.custom-card:hover {
 
 }
 #lista-productos .card {
-   width: 45%;
+   width: 48%;
 }
   }
 
@@ -299,4 +299,40 @@ justify-content: flex-start;
   width: 30%;
 }
 
+}
+
+/*estilo para el product-info.html*/
+/*contenedor principal*/
+.detalles-producto {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/*título*/
+.detalles-producto h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+/*párrafo*/
+.detalles-producto p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/*contenedor de imágenes*/
+.imagen-producto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/*imágenes*/
+.imagen-producto img {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
 }

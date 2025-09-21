@@ -1,4 +1,4 @@
-var productos = [];
+var productos = []; //pauta desafiate
 var productosFiltrados = [];
 
 // aca es para filtrar por precio
@@ -85,8 +85,7 @@ function aplicarOrdenamiento() {
 }
 
 
-// este es la correccion que hicimos de la entrega 1 
-
+//pauta desafiate
 function mostrarProductos(lista){
   const contenedor = document.getElementById("lista-productos");
   let contenido = "";
@@ -96,29 +95,38 @@ function mostrarProductos(lista){
     return;
   }
 
-  for (let i=0; i < lista.length; i++){
-    contenido = contenido + `
-    <div class="card">
-    <img src="${lista[i].image}" class="card-img">
-    <div class="card-info">
-    <h3 class="card-title">${lista[i].name}</h3>
-    <p class="card-description">${lista[i].description}</p>
-    <p class="card-price">${lista[i].currency} ${lista[i].cost}</p>
-    <p class="card-sold">Cantidad de vendidos: ${lista[i].soldCount}<br></p>
-    </div>
-    </div>
-    `;
-  }
+lista.forEach((producto) => {
+  contenido = contenido + `
+  <div class="card" id="${producto.id}" style="cursor:pointer;">
+  <img src="${producto.image}" class="card-img">
+  <div class="card-info">
+  <h3 class="card-title">${producto.name}</h3>
+  <p class="card-description">${producto.description}</p>
+  <p class="card-price">${producto.currency} ${producto.cost}</p>
+  <p class="card-sold">Cantidad de vendidos: ${producto.soldCount}<br></p>
+  </div>
+  </div>
+  `;
+});
   contenedor.innerHTML = contenido;
+
+  //código de la pauta 4 entrega 3
+const tarjetas= Array.from(document.getElementsByClassName("card"));
+tarjetas.forEach(tarjeta => {
+  tarjeta.addEventListener("click",() => {
+    const seleccion= tarjeta.id;
+    localStorage.setItem("productoSeleccionado",seleccion);
+    window.location.href="product-info.html";
+  });
+});
 }
 
-getJSONData(PRODUCTS_URL + "101" + EXT_TYPE).then(function(resultado){
+const categoriaID = localStorage.getItem("catID");
+const urlProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`;
+
+getJSONData(urlProductos).then(function(resultado){
   if (resultado.status === "ok") {
     productos = resultado.data.products;
-   
-    for (let i = 0; i < productos.length; i++) {
-        productosFiltrados.push(productos[i]);
-    }
     mostrarProductos(productos);
   }
 });
@@ -127,14 +135,16 @@ document.getElementById("buscador").addEventListener("input", (event) => {
   let busqueda = event.target.value.toLowerCase();
   let filtrados= [];
 
-  for (let i=0; i < productos.length; i++){
-    let nombreProducto= productos[i].name.toLowerCase();
-    let descripcionProducto= productos[i].description.toLowerCase();
+  productos.forEach((producto) => {
+    let nombreProducto= producto.name.toLowerCase();
+    let descripcionProducto= producto.description.toLowerCase();
 
     if (nombreProducto.indexOf(busqueda) !==-1 || descripcionProducto.indexOf(busqueda) !==-1){
-      filtrados.push(productos[i]);
+      filtrados.push(producto);
     }
-  }
+  });
+  mostrarProductos(filtrados);
+
   
   // aca actualizamos los productos filtrados y aplicamos el ordenamiento
   productosFiltrados = filtrados;
