@@ -336,3 +336,23 @@ justify-content: flex-start;
   height: auto;
   border-radius: 8px;
 }
+
+/*pauta 2 de entrega 4*/
+.fecha {
+  color:#888;
+}
+
+.card-price-info{
+  font-size: 20px;
+  color: #28a745;
+  font-weight: bold;
+  margin-top: auto;
+  text-align: left;
+}
+
+.card-title-info{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
