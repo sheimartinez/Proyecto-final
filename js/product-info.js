@@ -87,14 +87,19 @@ function mostrarComentarios(comentarios){
             }
         }
         contenidoComentarios= contenidoComentarios + `
-        <div class="border p-2 mb-2 d-flex justify-content-between align-items-center">
+        <div class="border p-2 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+        <strong>${comment.user}</strong>
+        <small class="fecha text-muted">${comment.dateTime}</small>
+        </div>
+
         <div>
-        <strong>${comment.user}</strong> <br> <small class="fecha">${comment.dateTime}</small><br>
+        <small>${estrellas}</small>
+        </div>
+
+        <p class="mt-2 mb-0">
         ${comment.description}
-        </div>
-        <div>
-        ${estrellas}
-        </div>
+        </p>
         </div>
         `;   
     });
