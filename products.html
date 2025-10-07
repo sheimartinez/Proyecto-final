@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+  <link href="css/products.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="loginLink"  href="login.html">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <!--arreglo del botón de búsqueda-->
+  <div class="buscador navbar navbar-dark bg-dark w-100 d-flex">
+    <div class="margen">
+      <input type="search" id="buscador" placeholder="Busca tus productos aquí..."> <!--buscador de pauta desafiate entrega 3-->
+      <button class="btn btn-light" id="btn-buscar">
+        <i class="fa fa-search"></i>
+      </button>
+    </div>
+  <!-- esta es la parte modificada para la entrega 3-->
+   <div class="filtrar">
+    <div class="filtros">
+      <p class="text-light">Filtrar por Precio</p>
+
+      <div class="rangos-precio">
+        <input type="number" id="minimo" placeholder="Precio mín" min="0">
+        <input type="number" id="maximo" placeholder="Precio máx" min="0">
+        <button onclick="filtrarProductos()">Filtrar</button>
+        <button onclick="limpiarFiltros()">Limpiar</button>
+      </div>
+    </div>
+   </div>
+
+   <div class="orden">
+    <div class="ordenar">
+      <select id="orden" onchange="ordenarProductos()">
+        <option value="" selected hidden>Ordenar por...</option>
+        <option value="precio-bajo">Precio: Menor a Mayor</option>
+        <option value="precio-alto">Precio: Mayor a Menor</option>
+        <option value="mas-vendidos">Más vendidos</option>
+      </select>
+    </div>
+  </div>
+</div>
+<main class="pb-5 container">
+  <div id="lista-productos" class="card-container">
+ 
+  </div>
+</main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/products.js"></script>
+  
+
+</body>
+
+</html>

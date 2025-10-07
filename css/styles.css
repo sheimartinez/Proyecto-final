@@ -1,0 +1,416 @@
+.jumbotron,
+.card-body,
+.container,
+.site-header {
+  font-family: 'Verdana', serif !important;
+}
+
+.jumbotron .display-4 {
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+.jumbotron {
+  height: 50vh;
+  padding: 5em inherit;
+  margin-bottom: 0;
+  background-color: #53C0FB;
+  background: url('../img/cover_back.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: black;
+  font-weight: bold;
+}
+
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+}
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: 300;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  text-shadow: 1px 1px 2px grey;
+}
+
+.jumbotron .lead {
+  font-size: 38px;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+.site-header a {
+  color: white;
+  transition: ease-in-out color .15s;
+}
+
+.site-header .dropdown-menu a {
+  color: black;
+}
+
+.dropzone {
+  border: 2px dashed #0087F7;
+  border-radius: 5px;
+  background: white;
+}
+
+.img-fit {
+  max-height: 100%;
+}
+
+.alert {
+  position: fixed;
+  top: 80px;
+  width: 50%;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+  top: 50%;
+  left: 50%;
+}
+
+.cursor-active {
+  cursor: pointer;
+}
+
+.left {
+  float: left;
+  padding: 4px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 51px;
+  height: 51px;
+  margin: 6px;
+  border: 6px solid #fff;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fff transparent transparent transparent;
+}
+
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+#spinner-wrapper {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1021;
+  display: none;
+}
+
+main {
+  min-height: calc(100vh - 210px);
+}
+
+a.custom-card,
+a.custom-card:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.checked {
+  color: orange;
+}
+/* Contenedor de las tarjetas */
+#lista-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  padding: 20px;
+}
+
+#lista-productos .card {
+  width: 30%;
+}
+
+/* Tarjeta individual */
+.card {
+  width: 350px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+/*Zoom al apoyar cursor en tarjeta */
+.card:hover {
+  transform: scale(1.1);
+}
+
+/* Imagen del producto */
+.card-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+/* Contenido de texto */
+.card-info {
+  padding: 15px;
+  text-align: left;
+}
+
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.card-description {
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 10px;
+  height: 50px;
+  overflow: hidden;
+}
+
+.card-price {
+  font-size: 16px;
+  color: #28a745;
+  font-weight: bold;
+  margin-top: auto;
+  text-align: left;
+}
+
+.card-sold {
+  font-size: 12px;
+  color: #888;}
+
+/*Tablet vertical*/  
+
+  @media (min-width:481px) and (max-width: 1024px){
+#lista-productos {
+  justify-content: center;
+
+}
+#lista-productos .card {
+   width: 48%;
+}
+  }
+
+
+
+  /*Smartphone Pequeño (Ej. iPhone SE): 320 x 568 px*/
+  @media (max-width: 480px) 
+   {
+    #lista-productos {
+      justify-content: center;
+    }
+    #lista-productos .card {
+      width: 100%;
+    }
+  
+}
+  
+
+  /* Pantalla Estándar*/
+  @media (min-width:1025px) {
+#lista-productos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+justify-content: flex-start;
+  padding: 20px;
+}
+
+#lista-productos .card {
+  width: 30%;
+}
+
+}
+
+/*estilo para el product-info.html*/
+/*contenedor principal*/
+.detalles-producto {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/*título*/
+.detalles-producto h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+/*párrafo*/
+.detalles-producto p {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+/*contenedor de imágenes*/
+.imagen-producto {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+/*imágenes*/
+.imagen-producto img {
+  width: 250px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/*pauta 2 de entrega 4*/
+.fecha {
+  color:#888;
+}
+
+.card-price-info{
+  font-size: 20px;
+  color: #28a745;
+  font-weight: bold;
+  margin-top: auto;
+  text-align: left;
+}
+
+.card-title-info{
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/*css del botón de búsqueda*/
+#buscador {
+  width: 300px;
+  padding: 5px;
+  border-radius: 8px;
+  height: 41px;
+  vertical-align: middle;
+}
+
+.buscador {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 105px;
+  align-items: center;
+  gap: 30px;
+}
+
+.margen {
+  margin-top: -35px;
+  align-items: center;
+}
+
+#btn-buscar {
+  border-radius: 8px;
+  align-items: center;
+  background-color: transparent;
+}
+
+#btn-buscar i {
+  color:white;
+}
+
+.filtros {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: nowrap;
+}
+
+.filtrar,
+.filtrar .filtros {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+.filtrar {
+  margin-top: -25px;
+}
+
+.ordenar {
+  margin-top: -40px;
+}
+
+.buscador.navbar {
+  overflow: hidden;
+  max-height: 90px;
+}
