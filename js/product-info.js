@@ -76,6 +76,8 @@ function mostrarProducto(producto){
         }
         imgProducto.src = producto.images[posicionImagen];
     });
+
+    mostrarRelacionados(producto.relatedProducts);
 }
 
 //parte 2 de entrega 4
@@ -110,4 +112,35 @@ function mostrarComentarios(comentarios){
         `;   
     });
     contenedor.innerHTML = contenidoComentarios;
+}
+
+function mostrarRelacionados(relacionados) {
+    const contenedor = document.getElementById("Produtos-relacionados");
+
+    let contenido = "";
+
+    if (relacionados == null || relacionados.length === 0) {
+        contenido += `<p>No hay productos relacionados</p>`;
+    } else {
+        for (let relacionado of relacionados) {
+            contenido += `
+            <div class="card mx-3" id="${relacionado.id}" style="cursor:pointer;">
+                <img src="${relacionado.image}" class="card-img">
+                <div class="card-info">
+                    <h3 class="card-title">${relacionado.name}</h3>
+                </div>
+            </div>
+            `;
+        }
+    }
+
+    contenedor.innerHTML += contenido;
+
+    let tarjetas = Array.from(contenedor.getElementsByClassName("card"));
+    tarjetas.forEach(tarjeta => {
+        tarjeta.addEventListener("click", () => {
+            localStorage.setItem("productoSeleccionado", tarjeta.id);
+            window.location.href = "product-info.html";
+        });
+    });
 }
