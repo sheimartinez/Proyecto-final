@@ -160,6 +160,9 @@ getJSONData(urlProductos).then(function(resultado){
   if (resultado.status === "ok") {
     productos = resultado.data.products;
     mostrarProductos(productos);
+    const cat = document.getElementById("textoCategoria");
+    cat.innerHTML = `
+    Aquí verás todos los productos disponibles de la categoría ${resultado.data.catName}`;//para que aparezca la categoría en el párrafo abajo del título
   }
 });
 
