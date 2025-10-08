@@ -38,30 +38,59 @@
     </div>
   </nav>
   <!--arreglo del botón de búsqueda-->
-  <div class="buscador navbar navbar-dark bg-dark w-100 d-flex">
-    <div class="margen">
-      <input type="search" id="buscador" placeholder="Busca tus productos aquí..."> <!--buscador de pauta desafiate entrega 3-->
-      <button class="btn btn-light" id="btn-buscar">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
-  <!-- esta es la parte modificada para la entrega 3-->
-   <div class="filtrar">
-    <div class="filtros">
-      <p class="text-light">Filtrar por Precio</p>
+  <div class="buscador navbar navbar-dark bg-dark p-3 mb-3">
+    <div class="container-fluid d-flex justify-content-between align-items-start flex-wrap">
 
-      <div class="rangos-precio">
-        <input type="number" id="minimo" placeholder="Precio mín" min="0">
-        <input type="number" id="maximo" placeholder="Precio máx" min="0">
-        <button onclick="filtrarProductos()">Filtrar</button>
-        <button onclick="limpiarFiltros()">Limpiar</button>
+      <!--buscador normal-->
+      <div class="busqueda d-flex align-items-center mb-2 d-none d-md-flex">
+        <input type="search" class="barraBuscador form-control me-2" placeholder="Busca tus productos aquí..." style="width: 250px;"> <!--buscador de pauta desafiate entrega 3-->
+        <button class="btn btn-outline-light" onclick="filtrarProductos()">
+          <i class="fa fa-search"></i>
+        </button>
       </div>
-    </div>
-   </div>
 
-   <div class="orden">
-    <div class="ordenar">
-      <select id="orden" onchange="ordenarProductos()">
+      <!--en pantallas chicas-->
+      <div class="icono d-inline d-md-none">
+        <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#barradesplegable" aria-expanded="false" aria-controls="barradesplegable">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+
+      <!--filtros normal-->
+  <!-- esta es la parte modificada para la entrega 3-->
+    <div class="price-filter d-flex align-items-center mb-2 d-none d-md-flex">
+      <p class="text-light mb-0 me-2">Filtrar por Precio:</p>
+        <input class="minimo form-control me-2" type="number" placeholder="Precio mín" style="width: 150px;">
+        <input class="maximo form-control me-2" type="number" placeholder="Precio máx" style="width: 150px;">
+        <button class="btn btn-outline-light me-2" onclick="filtrarProductos()">Filtrar</button>
+        <button class="btn btn-outline-light" onclick="limpiarFiltros()">Limpiar</button>
+    </div>
+
+    <!--ordenar por normal-->
+    <div class="ordenar d-none d-md-flex align-items-center mb-2 mb-md-0">
+      <select class="orden form-select" onchange="ordenarProductos()" style="width: 200px;">
+        <option value="" selected hidden>Ordenar por...</option>
+        <option value="precio-bajo">Precio: Menor a Mayor</option>
+        <option value="precio-alto">Precio: Mayor a Menor</option>
+        <option value="mas-vendidos">Más vendidos</option>
+      </select>
+    </div>
+
+    <!--colapso en pantallas chicas de barra de búsqueda, filtros y ordenar por-->
+    <div class="collapse d-md-none mt-2 w-100" id="barradesplegable">
+      <input type="search" class="barraBuscador form-control mb-2" placeholder="Busca tus productos aquí...">
+
+      <!--filtros en chiquito-->
+      <p class="text-light mb-1">Filtrar por Precio:</p>
+      <div class="d-flex mb-2">
+        <input type="number" class="minimo form-control me-2" placeholder="Precio mín">
+        <input type="number" class="maximo form-control me-2" placeholder="Precio máx">
+        <button class="btn btn-outline-light me-2" onclick="filtrarProductos()">Filtrar</button>
+        <button class="btn btn-outline-light" onclick="limpiarFiltros()">Limpiar</button>
+      </div>
+
+      <!--ordenar por en chiquito-->
+      <select class="orden form-select" onchange="ordenarProductos()">
         <option value="" selected hidden>Ordenar por...</option>
         <option value="precio-bajo">Precio: Menor a Mayor</option>
         <option value="precio-alto">Precio: Mayor a Menor</option>
@@ -71,6 +100,9 @@
   </div>
 </div>
 <main class="pb-5 container">
+  <!--texto con título y descripción antes de mostrar los productos-->
+  <h1 class="text-center"><strong>Productos</strong></h1>
+  <p class="text-center" id="textoCategoria">Aquí verás todos los productos disponibles de la categoría</p>
   <div id="lista-productos" class="card-container">
  
   </div>

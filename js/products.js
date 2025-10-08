@@ -3,18 +3,33 @@ var productosFiltrados = [];
 
 // aca es para filtrar por precio
 function filtrarProductos() {
-    let minimoInput = document.getElementById('minimo').value;
-    let maximoInput = document.getElementById('maximo').value;
+    let minimoInput = document.getElementsByClassName('minimo');
+    let maximoInput = document.getElementsByClassName('maximo');
+
+    let minInput= "";
+    let maxInput= "";
+
+    for (let i = 0; i < minimoInput.length; i++){
+        if (minInput === "" && minimoInput[i].value !== ""){
+            minInput = minimoInput[i].value;
+        }
+    }
     
+    for (let i = 0; i < maximoInput.length; i++){
+        if (maxInput === "" && maximoInput[i].value !== ""){
+            maxInput = maximoInput[i].value;
+        }
+    }
+
     let minimo = 0;
     let maximo = 999999999;
     
-    if (minimoInput !== "") {
-        minimo = parseInt(minimoInput);
+    if (minInput !== "") {
+        minimo = parseInt(minInput);
     }
     
-    if (maximoInput !== "") {
-        maximo = parseInt(maximoInput);
+    if (maxInput !== "") {
+        maximo = parseInt(maxInput);
     }
     
     // filtrar productos
@@ -30,9 +45,21 @@ function filtrarProductos() {
 
 // como lo dice esto es lo que pedia para limpiar filtros
 function limpiarFiltros() {
-    document.getElementById('minimo').value = '';
-    document.getElementById('maximo').value = '';
-    document.getElementById('orden').value = 'precio-bajo';
+    const minimoLimpiar = document.getElementsByClassName('minimo');
+    const maximoLimpiar = document.getElementsByClassName('maximo');
+    const ordenLimpiar= document.getElementsByClassName('orden');
+
+    for(let i = 0; i < minimoLimpiar.length; i++){
+        minimoLimpiar[i].value = "";
+    }
+
+    for(let i = 0; i < maximoLimpiar.length; i++){
+        maximoLimpiar[i].value = "";
+    }
+
+    for(let i = 0; i < ordenLimpiar.length; i++){
+        ordenLimpiar[i].value = "precio-bajo";
+    }
     
     productosFiltrados = [];
     for (let i = 0; i < productos.length; i++) {
@@ -49,39 +76,44 @@ function ordenarProductos() {
 
 // y con esta funcion puedo aplicar sort
 function aplicarOrdenamiento() {
-    const tipoOrden = document.getElementById('orden').value;
-    
-    let productosAMostrar;
-    if (productosFiltrados.length > 0) {
-        productosAMostrar = productosFiltrados;
-    } else {
-        productosAMostrar = productos;
+    const ordenAplicar = document.getElementsByClassName('orden');
+    let tipoOrden = "precio-bajo";
+
+    for(let i = 0; i< ordenAplicar.length; i++){
+        if(ordenAplicar[i].offsetParent !== null && tipoOrden === "precio-bajo" && ordenAplicar[i].value !== ""){
+            tipoOrden = ordenAplicar[i].value;
+        }
     }
     
-    // esto es una copia del array porque si no se modifica el original y no se puede volver atras
-    let productosCopia = [];
-    for (let i = 0; i < productosAMostrar.length; i++) {
-        productosCopia.push(productosAMostrar[i]);
+    let productosAMostrar= [];
+    if (productosFiltrados.length > 0) {
+        for(let i=0; i < productosFiltrados.length; i++){
+        productosAMostrar.push(productosFiltrados[i]);
+    }
+    } else {
+        for(let i=0; i<productos.length; i++){
+        productosAMostrar.push(productos[i]);
+    }
     }
     
     // aca usamos sort para ordenar
     if (tipoOrden === 'precio-bajo') {
-        productosCopia.sort(function(a, b) {
+        productosAMostrar.sort(function(a, b) {
             return a.cost - b.cost; // por las dudas marco que aca es de menor a mayor
         });
     } 
     else if (tipoOrden === 'precio-alto') {
-        productosCopia.sort(function(a, b) {
+        productosAMostrar.sort(function(a, b) {
             return b.cost - a.cost; // y aca de mayor a menor
         });
     }
     else if (tipoOrden === 'mas-vendidos') {
-        productosCopia.sort(function(a, b) {
+        productosAMostrar.sort(function(a, b) {
             return b.soldCount - a.soldCount; // con esto nos fijamos los mas vendidos 
         });
     }
     
-    mostrarProductos(productosCopia);
+    mostrarProductos(productosAMostrar);
 }
 
 
@@ -90,7 +122,7 @@ function mostrarProductos(lista){
   const contenedor = document.getElementById("lista-productos");
   let contenido = "";
 
-  if (lista.length === 0){
+  if (!lista || lista.length === 0){
     contenedor.innerHTML = "<p>Sin resultados.</p>";
     return;
   }
@@ -131,7 +163,10 @@ getJSONData(urlProductos).then(function(resultado){
   }
 });
 
-document.getElementById("buscador").addEventListener("input", (event) => {
+const buscar= document.getElementsByClassName("barraBuscador");
+
+for(let i=0; i < buscar.length; i++){
+buscar[i].addEventListener("input", (event) => {
   let busqueda = event.target.value.toLowerCase();
   let filtrados= [];
 
@@ -148,5 +183,12 @@ document.getElementById("buscador").addEventListener("input", (event) => {
   
   // aca actualizamos los productos filtrados y aplicamos el ordenamiento
   productosFiltrados = filtrados;
+
+  if (productosFiltrados.length === 0) {
+    mostrarProductos([]);
+    return;
+  }
+
   aplicarOrdenamiento();
 });
+}

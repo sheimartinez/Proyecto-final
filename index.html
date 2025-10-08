@@ -41,6 +41,13 @@
     <div class="jumbotron text-center"></div>
     <div class="album py-5 bg-light">
       <div class="container">
+
+        <!--Carrusel de categorías-->
+        <div id="carruselCategorias" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+          <div class="carousel-inner">
+
+            <!--Primeras 3 tarjetitas-->
+            <div class="carousel-item active">
         <div class="row">
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm custom-card cursor-active" id="autos">
@@ -73,8 +80,62 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <!--Segundas 3 tarjetitas (copiando el código de la página)-->
+      <div class="carousel-item">
         <div class="row">
-          <a class="btn btn-light btn-lg btn-block" href="categories.html">Y mucho más!</a>
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="herramientas">
+              <img class="bd-placeholder-img card-img-top" src="img/cat104_1.jpg"
+              alt="Imagen representativa de la categoría 'Herramientas'">
+              <h3 class="m-3">Herramientas</h3>
+              <div class="card-body">
+                <p class="card-text">Herramientas para cualquier tipo de trabajo.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="computadoras">
+              <img class="bd-placeholder-img card-img-top" src="img/cat105_1.jpg"
+              alt="Imagen representativa de la categoría 'Computadoras'">
+              <h3 class="m-3">Computadoras</h3>
+              <div class="card-body">
+                <p class="card-text">Todo en cuanto a computadoras, para uso de oficina y/o juegos.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="card mb-4 shadow-sm custom-card cursor-active" id="vestimenta">
+              <img class="bd-placeholder-img card-img-top" src="img/cat106_1.jpg"
+              alt="Imagen representativa de la categoría 'Vestimenta'">
+              <h3 class="m-3">Vestimenta</h3>
+              <div class="card-body">
+                <p class="card-text">Gran variedad de ropa, nueva y de segunda mano.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--botones del carrusel-->
+    <!--botón para retroceder-->
+    <button class="carousel-control-prev" type="button" data-bs-target="#carruselCategorias" data-bs-slide="prev" style="left: -150px;">
+      <span class="carousel-control-prev-icon" style="background-color: black" aria-hidden="true"></span>
+      <span class="visually-hidden">Anterior</span>
+    </button>
+
+    <!--botón para avanzar-->
+    <button class="carousel-control-next" type="button" data-bs-target="#carruselCategorias" data-bs-slide="next" style="right: -90px;">
+      <span class="carousel-control-next-icon" style="background-color: black" aria-hidden="true"></span>
+      <span class="visually-hidden">Siguiente</span>
+    </button>
+    <!--fin del carrusel-->
+        <div class="row">
+          <a class="btn btn-light btn-lg btn-block" href="categories.html">&gt; Accede a todas las categorías aquí &lt;</a>
         </div>
       </div>
     </div>

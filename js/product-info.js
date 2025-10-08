@@ -32,11 +32,17 @@ function mostrarProducto(producto){
     <div class="detalles-producto">
     <h2 class="card-title-info">${producto.name}</h2>
 
-    <div style="display:flex; gap:20px; align-items:flex-start;">
-    <div id="carrusel-producto" style="width:500px; height:350px; overflow:hidden; position:relative;">
+    <div style="display:flex; gap:70px; align-items:flex-start;">
+    <div id="carrusel-producto" style="width:500px; height:350px; overflow:visible; position:relative;">
     <img id="imagenProducto" src="${producto.images[0]}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-    <button id="btnSiguiente" style="position:absolute; top:50%; right:0; transform:translateY(-50%); padding:5px; cursor:pointer;"></button>
-    <button id="btnAnterior" style="position:absolute; top:50%; left:0; transform:translateY(-50%); padding:5px; cursor:pointer;"></button>
+    <button id="btnSiguiente" type="button" style="position:absolute; top:50%; right:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Siguiente</span>
+    </button>
+    <button id="btnAnterior" type="button" style="position:absolute; top:50%; left:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Anterior</span>
+    </button>
     </div>
 
     <div style="flex:1; display:flex; flex-direction:column; gap:5px;">
