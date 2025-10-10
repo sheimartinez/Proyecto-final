@@ -30,6 +30,18 @@ function filtrarProductos() {
     
     if (maxInput !== "") {
         maximo = parseInt(maxInput);
+    let minimoInput = document.getElementById('minimo').value;
+    let maximoInput = document.getElementById('maximo').value;
+    
+    let minimo = 0;
+    let maximo = 999999999;
+    
+    if (minimoInput !== "") {
+        minimo = parseInt(minimoInput);
+    }
+    
+    if (maximoInput !== "") {
+        maximo = parseInt(maximoInput);
     }
     
     // filtrar productos
@@ -60,6 +72,9 @@ function limpiarFiltros() {
     for(let i = 0; i < ordenLimpiar.length; i++){
         ordenLimpiar[i].value = "precio-bajo";
     }
+    document.getElementById('minimo').value = '';
+    document.getElementById('maximo').value = '';
+    document.getElementById('orden').value = 'precio-bajo';
     
     productosFiltrados = [];
     for (let i = 0; i < productos.length; i++) {
@@ -94,26 +109,41 @@ function aplicarOrdenamiento() {
         for(let i=0; i<productos.length; i++){
         productosAMostrar.push(productos[i]);
     }
+    const tipoOrden = document.getElementById('orden').value;
+    
+    let productosAMostrar;
+    if (productosFiltrados.length > 0) {
+        productosAMostrar = productosFiltrados;
+    } else {
+        productosAMostrar = productos;
+    }
+    
+    // esto es una copia del array porque si no se modifica el original y no se puede volver atras
+    let productosCopia = [];
+    for (let i = 0; i < productosAMostrar.length; i++) {
+        productosCopia.push(productosAMostrar[i]);
     }
     
     // aca usamos sort para ordenar
     if (tipoOrden === 'precio-bajo') {
         productosAMostrar.sort(function(a, b) {
+        productosCopia.sort(function(a, b) {
             return a.cost - b.cost; // por las dudas marco que aca es de menor a mayor
         });
     } 
     else if (tipoOrden === 'precio-alto') {
         productosAMostrar.sort(function(a, b) {
+        productosCopia.sort(function(a, b) {
             return b.cost - a.cost; // y aca de mayor a menor
         });
     }
     else if (tipoOrden === 'mas-vendidos') {
-        productosAMostrar.sort(function(a, b) {
+        productosCopia.sort(function(a, b) {
             return b.soldCount - a.soldCount; // con esto nos fijamos los mas vendidos 
         });
     }
     
-    mostrarProductos(productosAMostrar);
+    mostrarProductos(productosCopia);
 }
 
 
@@ -123,6 +153,7 @@ function mostrarProductos(lista){
   let contenido = "";
 
   if (!lista || lista.length === 0){
+  if (lista.length === 0){
     contenedor.innerHTML = "<p>Sin resultados.</p>";
     return;
   }
@@ -170,6 +201,10 @@ const buscar= document.getElementsByClassName("barraBuscador");
 
 for(let i=0; i < buscar.length; i++){
 buscar[i].addEventListener("input", (event) => {
+  }
+});
+
+document.getElementById("buscador").addEventListener("input", (event) => {
   let busqueda = event.target.value.toLowerCase();
   let filtrados= [];
 
@@ -195,3 +230,5 @@ buscar[i].addEventListener("input", (event) => {
   aplicarOrdenamiento();
 });
 }
+  aplicarOrdenamiento();
+});

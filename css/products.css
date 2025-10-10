@@ -70,3 +70,10 @@
     border-radius: 4px;
     background: white;
 }
+.container mt-4 {
+    display: flex;
+  justify-content: space-between; /* separa ambos lados */
+  align-items: flex-start; /* alinea arriba */
+  gap: 30px; /* espacio entre los dos */
+  margin: 40px;
+}
