@@ -91,30 +91,6 @@
 
       <!--ordenar por en chiquito-->
       <select class="orden form-select" onchange="ordenarProductos()">
-  <div class="buscador navbar navbar-dark bg-dark w-100 d-flex">
-    <div class="margen">
-      <input type="search" id="buscador" placeholder="Busca tus productos aquí..."> <!--buscador de pauta desafiate entrega 3-->
-      <button class="btn btn-light" id="btn-buscar">
-        <i class="fa fa-search"></i>
-      </button>
-    </div>
-  <!-- esta es la parte modificada para la entrega 3-->
-   <div class="filtrar">
-    <div class="filtros">
-      <p class="text-light">Filtrar por Precio</p>
-
-      <div class="rangos-precio">
-        <input type="number" id="minimo" placeholder="Precio mín" min="0">
-        <input type="number" id="maximo" placeholder="Precio máx" min="0">
-        <button onclick="filtrarProductos()">Filtrar</button>
-        <button onclick="limpiarFiltros()">Limpiar</button>
-      </div>
-    </div>
-   </div>
-
-   <div class="orden">
-    <div class="ordenar">
-      <select id="orden" onchange="ordenarProductos()">
         <option value="" selected hidden>Ordenar por...</option>
         <option value="precio-bajo">Precio: Menor a Mayor</option>
         <option value="precio-alto">Precio: Mayor a Menor</option>
