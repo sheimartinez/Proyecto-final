@@ -115,7 +115,7 @@ function mostrarComentarios(comentarios){
 }
 
 function mostrarRelacionados(relacionados) {
-    const contenedor = document.getElementById("Produtos-relacionados");
+    const contenedor = document.getElementById("productos-relacionados");
 
     let contenido = "";
 
