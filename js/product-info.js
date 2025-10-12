@@ -144,3 +144,100 @@ function mostrarRelacionados(relacionados) {
         });
     });
 }
+
+// desafiate
+let todasLasResenas = [];
+
+// Función para generar estrellas 
+function generarEstrellas(puntaje) {
+    let estrellas = "";
+    for (let i = 1; i <= 5; i++) {
+        if (i <= puntaje) {
+            estrellas += '<span class="fa fa-star checked"></span>';
+        } else {
+            estrellas += '<span class="fa fa-star"></span>';
+        }
+    }
+    return estrellas;
+}
+
+// formatear fecha
+
+function formatearFecha(fecha) {
+    return new Date(fecha).toLocaleString('es-ES');
+}
+
+
+// mostrar comentarios
+
+function mostrarComentarios(comentarios) {
+    const contenedor = document.getElementById("lista-comentarios");
+    let contenidoComentarios = "";
+   
+    todasLasResenas = [...comentarios];
+    
+    // aca mostramos todos los comentarios
+
+    todasLasResenas.forEach(comment => {
+        contenidoComentarios += `
+        <div class="border p-2 mb-2 d-flex justify-content-between align-items-center">
+            <div>
+                <strong>${comment.user}</strong> <br> 
+                <small class="fecha">${formatearFecha(comment.dateTime)}</small><br>
+                ${comment.description}
+            </div>
+            <div>
+                ${generarEstrellas(comment.score)}
+            </div>
+        </div>
+        `;   
+    });
+    
+    contenedor.innerHTML = contenidoComentarios;
+}
+
+//envío del formulario
+
+function manejarEnvioResena(event) {
+    event.preventDefault();
+    
+    const usuario = document.getElementById('usuario').value;
+    const puntaje = parseInt(document.getElementById('puntaje').value);
+    const comentario = document.getElementById('comentario').value;
+    
+    
+    if (!usuario || !puntaje || !comentario) {
+        alert('Por favor completá todos los campos');
+        return;
+    }
+    
+    // creamos una nueva reseña
+
+    const nuevaResena = {
+        user: usuario,
+        score: puntaje,
+        description: comentario,
+        dateTime: new Date().toISOString() 
+    };
+    
+    // agregamos al array en memoria
+
+    todasLasResenas.unshift(nuevaResena); 
+    
+
+    mostrarComentarios(todasLasResenas);
+    
+    
+    document.getElementById('form-resena').reset();
+    
+    // mensaje de éxito
+    
+    alert('¡Reseña agregada correctamente!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const formResena = document.getElementById('form-resena');
+    if (formResena) {
+        formResena.addEventListener('submit', manejarEnvioResena);
+    }
+});
