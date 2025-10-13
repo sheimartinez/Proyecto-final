@@ -356,3 +356,35 @@ justify-content: flex-start;
   margin-bottom: 8px;
   color: #333;
 }
+
+/*css para las tarjetas de categories.html*/
+.list-group-item {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px; /*margen entre tarjetas*/
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  background-color: #fff;
+}
+
+.list-group-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.list-group-item img {
+  border-radius: 8px;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.list-group-item h4,
+.list-group-item p,
+.list-group-item small {
+  margin-bottom: 5px;
+}
+
+#cat-list-container {
+  margin-top: 20px;
+}

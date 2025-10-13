@@ -129,7 +129,7 @@ function mostrarProductos(lista){
 
 lista.forEach((producto) => {
   contenido = contenido + `
-  <div class="card" id="${producto.id}" style="cursor:pointer;">
+  <div class="card" id="${producto.id}" data-aos="flip-right" style="cursor:pointer;">
   <img src="${producto.image}" class="card-img">
   <div class="card-info">
   <h3 class="card-title">${producto.name}</h3>
@@ -141,6 +141,7 @@ lista.forEach((producto) => {
   `;
 });
   contenedor.innerHTML = contenido;
+  AOS.refresh();
 
   //código de la pauta 4 entrega 3
 const tarjetas= Array.from(document.getElementsByClassName("card"));
