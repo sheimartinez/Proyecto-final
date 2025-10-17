@@ -44,9 +44,19 @@
           <li class="nav-item">
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="loginLink"  href="login.html">Login</a>
+
+          <li class="nav-item" id="login-item">
+            <a class="nav-link" id="loginLink" href="login.html">Login</a>
           </li>
+
+          <li class="nav-item d-flex align-items-center" id="user-profile-item" style="display: none;">
+            <a id="user-profile-link" class="nav-link d-flex align-items-center" href="my-profile.html">
+              <img id="nav-profile-img" src="img/default-profile.png" alt="Perfil"
+                  class="rounded-circle me-2" width="30" height="30" style="object-fit: cover;">
+              <span id="username-text"></span>
+            </a>
+          </li>
+
         </ul>
       </div>
     </div>
@@ -54,7 +64,22 @@
   <main>
     <div class="container">
       <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+        
+        <main>
+          <div class="container mt-5 text-center">
+            <h2>Mi Perfil</h2>
+            <div class="mt-3">
+              <img id="profile-img" src="img/default-profile.png" alt="Imagen de perfil" class="rounded-circle border" width="150" height="150" style="object-fit: cover;">
+            </div>
+            <div class="mt-3">
+              <input type="file" id="file-input" accept="image/*" class="form-control w-50 mx-auto">
+            </div>
+            <p class="text-muted mt-2">Selecciona una imagen para tu perfil.</p>
+          </div>
+          <button id="logout-btn" class="btn btn-danger mt-3">Cerrar sesión</button>
+
+        </main>
+
       </div>
     </div>
   </main>
