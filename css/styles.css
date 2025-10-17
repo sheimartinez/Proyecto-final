@@ -388,3 +388,120 @@ justify-content: flex-start;
 #cat-list-container {
   margin-top: 20px;
 }
+
+/*código css para el botón de modo oscuro de products.html*/
+.modo-oscuro {
+  background-color: #212529 !important;
+  color: #e0e0e0 !important;
+}
+
+/*para el buscador */
+.modo-oscuro .buscador {
+  background-color: #212529 !important;
+  color: #e0e0e0 !important;
+}
+
+/*para las tarjetas*/
+.modo-oscuro .card {
+  background-color: #1f1f1f !important;
+  border-color: #333 !important;
+  color: #e0e0e0 !important;
+}
+
+/*los títulos, descripción y cant de vendidos*/
+.modo-oscuro .card-title,
+.modo-oscuro .card-description,
+.modo-oscuro .card-sold {
+  color: #e0e0e0 !important;
+}
+
+.modo-oscuro input,
+.modo-oscuro select {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555 !important;
+}
+
+/*texto dentro de los input*/
+.modo-oscuro input::placeholder {
+  color: #c0c0c0;
+}
+
+ /*para los botones en el hover*/
+.modo-oscuro .btn-outline-light:hover {
+  color: #121212;
+}
+
+/*le saco el borde al botón de modo oscuro*/
+#modoBtn {
+  border: none;
+}
+
+/*para el botón de modo oscuro de categories.html*/
+/*estilo para las tarjetas con las categorías*/
+.modo-oscuro .list-group-item {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555;
+}
+
+/*letras claras en el modo oscuro*/
+.modo-oscuro .list-group-item h4,
+.modo-oscuro .list-group-item p,
+.modo-oscuro .list-group-item small {
+  color: #e0e0e0 !important;
+}
+
+/*para los input de filtrado*/
+.modo-oscuro #rangeFilterCountMin,
+.modo-oscuro #rangeFilterCountMax {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555 !important;
+}
+
+/*modo oscuro para el product-info.html*/
+/*poner la parte de comentar en modo oscuro y placeholder claro*/
+.modo-oscuro textarea {
+  background-color: #333 !important;
+  color: #e0e0e0 !important;
+  border-color: #555 !important;
+}
+
+.modo-oscuro textarea::placeholder {
+  color: #c0c0c0;
+}
+
+/*título claro cuando está en modo oscuro*/
+.modo-oscuro .card-title-info {
+  color: #e0e0e0 !important;
+}
+
+/*estilo para el modo oscuro de sell.html*/
+/*para la parte de poner imágenes*/
+.modo-oscuro #file-upload {
+  background-color: #333 !important;
+  border: 2px dashed #777 !important;
+  color: #e0e0e0 !important;
+}
+
+/*estilo para el modo oscuro del index.html*/
+/* --- Fondo del modo oscuro --- */
+body.modo-oscuro .jumbotron {
+  background-image: url('../img/cover_back_oscuro.png') !important;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: white !important; 
+}
+
+/* Fondo del card-body en modo oscuro */
+.modo-oscuro .album {
+  background-color: #212529 !important; /* mismo color que la tarjeta */
+  color: #e0e0e0 !important; /* textos claros */
+}
+
+.modo-oscuro .btn.btn-light {
+  background-color: #212529 !important;
+  color: #e0e0e0;
+}
