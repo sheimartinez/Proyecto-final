@@ -505,3 +505,16 @@ body.modo-oscuro .jumbotron {
   background-color: #212529 !important;
   color: #e0e0e0;
 }
+
+/*modo oscuro para el perfil*/
+.modo-oscuro #profile-form {
+    background: #1f1f1f;   /* fondo oscuro */
+    color: #e0e0e0;        /* texto claro */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* sombra más visible */
+}
+
+.modo-oscuro footer {
+    background-color: #212529; /* mismo color oscuro que otras secciones */
+    color: #e0e0e0;
+    border-top: 1px solid #333;
+}

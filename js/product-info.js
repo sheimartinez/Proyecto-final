@@ -232,7 +232,11 @@ function manejarEnvioResena(event) {
     
     // mensaje de éxito
     
-    alert('¡Reseña agregada correctamente!');
+   Swal.fire({
+    icon: 'success',
+    title: '¡Tu reseña fue agregada con éxito!',
+    showConfirmButton: true,
+   });
 }
 
 document.addEventListener('DOMContentLoaded', function() {
