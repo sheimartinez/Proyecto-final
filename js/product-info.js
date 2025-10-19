@@ -180,14 +180,15 @@ function mostrarComentarios(comentarios) {
 
     todasLasResenas.forEach(comment => {
         contenidoComentarios += `
-        <div class="border p-2 mb-2 d-flex justify-content-between align-items-center">
+        <div class="comentario border p-3 mb-3">
+            <div class="encabezado-comentario d-flex justify-content-between align-items-start">
             <div>
-                <strong>${comment.user}</strong> <br> 
-                <small class="fecha">${formatearFecha(comment.dateTime)}</small><br>
-                ${comment.description}
+                <strong>${comment.user}</strong>
+                <div class="estrellas mt-1">${generarEstrellas(comment.score)}</div>
+                </div>
+                <small class="fecha text-muted">${formatearFecha(comment.dateTime)}</small>
             </div>
-            <div>
-                ${generarEstrellas(comment.score)}
+            <p class="mt-3 mb-0">${comment.description}</p>
             </div>
         </div>
         `;   
