@@ -5,16 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const password = document.getElementById('password');
     const boton = document.getElementById('boton');
 
- 
+
     boton.addEventListener("click", (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
-        if (usuario.value === "" || password.value === "") {
-            alert("Inválido");
-        } else {
-            localStorage.setItem("usuarioLogeado", usuario.value); // esta parte me re complico porue era lo que faltaba para ir al index.html nuevamente
+        if (usuario.value === ""  password.value === "") {
+        alert("Inválido");
+    }
 
-            window.location.href = "index.html";
-        }
-    });
+    if ((usuario.value.indexOf("@") === -1  usuario.value.indexOf(".") === -1)) {
+    alert("Por favor ingrese un email válido.");
+    return;
+}
+localStorage.setItem("usuarioLogeado", usuario.value); // esta parte me re complico porue era lo que faltaba para ir al index.html nuevamente
+
+window.location.href = "index.html";
 });

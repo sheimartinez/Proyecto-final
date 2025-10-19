@@ -9,22 +9,137 @@
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
+      <!--PARTE 4 Entrega 4-->
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        main {
+            flex: 1;
+            padding: 2rem 0;
+        }
+
+        .profile-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        #profile-form {
+            background: #dfb2e0;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+            margin-top: 2rem;
+        }
+
+        #profile-form h2 {
+            color: #8b7d6b;
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: 1.5rem;
+            text-align: center;
+        }
+
+        #profile-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #a39e93;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+        #profile-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid #e1dcd5;
+            border-radius: 8px;
+            background: #fffefc;
+            color: #6d6760;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        #profile-form input:focus {
+            outline: none;
+            border-color: #c4b5a3;
+            box-shadow: 0 0 0 2px rgba(196, 181, 163, 0.1);
+        }
+
+        #profile-form input[readonly] {
+            background-color: #f5f2ee;
+            color: #87929a;
+        }
+
+        #profile-form button,
+        #logout-btn {
+            width: 100%;
+            padding: 0.85rem;
+            background: #d4c8b8;
+            color: #7a6f5f;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        #profile-form button:hover,
+        #logout-btn:hover {
+            background: #c8bbaa;
+        }
+
+        .rounded-circle {
+            border: 3px solid #e1dcd5 !important;
+        }
+
+        .form-control {
+            border: 1px solid #e1dcd5;
+            border-radius: 8px;
+            padding: 0.75rem;
+            background: #fffefc;
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #f8f9fa;
+            padding: 2rem 0;
+            border-top: 1px solid #e1dcd5;
+        }
+    </style>
 </head>
 
 <body>
@@ -69,8 +184,6 @@
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
         
         <main>
           <div class="container mt-5 text-center">
@@ -83,9 +196,23 @@
             </div>
             <p class="text-muted mt-2">Selecciona una imagen para tu perfil.</p>
           </div>
-          <button id="logout-btn" class="btn btn-danger mt-3">Cerrar sesión</button>
+          <!-- PARTE 4 ENTREGA 5-->
+            <form id="profile-form">
+                <label for="email">Email</label>
+                <input type="email" id="usuario" readonly>
 
-        </main>
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre">
+
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido">
+
+                <button type="submit">Guardar cambios</button>
+            </form>
+
+            <button id="logout-btn" class="btn btn-danger mt-3">Cerrar sesión</button>
+        </div>
+    </main>
 
       </div>
     </div>

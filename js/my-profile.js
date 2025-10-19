@@ -41,6 +41,51 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+  // PARTE 4 ENTEGA 5
+
+  const form = document.getElementById("profile-form");
+  const emailInput = document.getElementById("usuario");
+  const nombreInput = document.getElementById("nombre");
+  const apellidoInput = document.getElementById("apellido");
+
+  // toma el email con el usuario logueado
+ const usuarioEmail = localStorage.getItem("usuarioLogeado");
+if (emailInput && usuarioEmail) {
+    emailInput.value = usuarioEmail;
+}
+
+  // aca se carga los datos guardados del perfil
+  const perfilGuardado = JSON.parse(localStorage.getItem("perfilUsuario")) || {};
+
+  if (perfilGuardado[usuario]) {
+    const datos = perfilGuardado[usuario];
+    if (nombreInput) nombreInput.value = datos.nombre || "";
+    if (apellidoInput) apellidoInput.value = datos.apellido || "";
+  }
+
+  // los datos al enviar el formulario
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      // datos ingresados
+      const datos = {
+        nombre: nombreInput.value,
+        apellido: apellidoInput.value,
+      };
+
+      // datos en localStorage (por usuario)
+      perfilGuardado[usuario] = datos;
+      localStorage.setItem("perfilUsuario", JSON.stringify(perfilGuardado));
+
+      alert("Perfil guardado correctamente ✅");
+    });
+  }
+
+
+
+
+
 
 
 
