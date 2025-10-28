@@ -62,6 +62,20 @@ function mostrarProducto(producto){
     });
 
     mostrarRelacionados(producto.relatedProducts);
+
+    //pauta 2 entrega 6 - botones
+const buy = document.getElementById('buy')
+const cart = document.getElementById('cart')
+
+buy.addEventListener ('click', () => {
+    localStorage.setItem("nombreproducto", producto.name);
+    localStorage.setItem("costoproducto", producto.cost);
+    localStorage.setItem("monedaproducto", producto.currency);
+    localStorage.setItem("imagenproducto", producto.images[0]);
+
+    window.location.href="cart.html";
+})
+
 }
 
 //parte 2 de entrega 4
@@ -230,3 +244,5 @@ document.addEventListener('DOMContentLoaded', function() {
         formResena.addEventListener('submit', manejarEnvioResena);
     }
 });
+
+
