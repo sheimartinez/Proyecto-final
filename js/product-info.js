@@ -76,6 +76,24 @@ buy.addEventListener ('click', () => {
     window.location.href="cart.html";
 })
 
+cart.addEventListener ('click', () => {
+    localStorage.setItem("nombreproducto", producto.name);
+    localStorage.setItem("costoproducto", producto.cost);
+    localStorage.setItem("monedaproducto", producto.currency);
+    localStorage.setItem("imagenproducto", producto.images[0]);
+
+
+//mensaje de exito
+Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "El producto fue añadido correctamente al carrito",
+  showConfirmButton: false,
+  timer: 1500
+});
+
+})
+
 }
 
 //parte 2 de entrega 4
