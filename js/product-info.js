@@ -26,40 +26,24 @@ getJSONData(urlComentarios).then(function(resultado){
 
 //modificación de la función para el carrusel de la entrega 4
 function mostrarProducto(producto){
-    const contenedor= document.getElementById("lista-productos");
-
-    contenedor.innerHTML= `
-    <div class="detalles-producto">
-    <h2 class="card-title-info">${producto.name}</h2>
-
-    <div style="display:flex; gap:70px; align-items:flex-start;">
-    <div id="carrusel-producto" style="width:500px; height:350px; overflow:visible; position:relative;">
-    <img id="imagenProducto" src="${producto.images[0]}" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
-    <button id="btnSiguiente" type="button" style="position:absolute; top:50%; right:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Siguiente</span>
-    </button>
-    <button id="btnAnterior" type="button" style="position:absolute; top:50%; left:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Anterior</span>
-    </button>
-    </div>
-
-    <div style="flex:1; display:flex; flex-direction:column; gap:5px;">
-    <h3 class="card-price-info">${producto.currency} ${producto.cost}</h3>
-    <p><strong>Descripción: </strong>${producto.description}</p>
-    <p><strong>Categoría: </strong>${producto.category}</p>
-    <p><strong>Cantidad de vendidos: </strong>${producto.soldCount}</p>
-    </div>
-    </div>
-    </div>
-    `;
-
-    let posicionImagen = 0;
+    const nombreProducto= document.getElementById("nombreProducto");
+    const precioProducto= document.getElementById("precioProducto");
+    const descripcionProducto= document.getElementById("descripcionProducto");
+    const categoriaProducto= document.getElementById("categoriaProducto");
+    const cantidadVendidos = document.getElementById("vendidosProducto");
     const imgProducto = document.getElementById("imagenProducto");
     const btnSiguiente = document.getElementById("btnSiguiente");
     const btnAnterior = document.getElementById("btnAnterior");
 
+    nombreProducto.innerHTML = producto.name;
+    precioProducto.innerHTML = producto.currency + " " + producto.cost;
+    descripcionProducto.innerHTML = producto.description;
+    categoriaProducto.innerHTML = producto.category;
+    cantidadVendidos.innerHTML = producto.soldCount;
+
+    let posicionImagen = 0;
+    imgProducto.src = producto.images[posicionImagen];
+    
     btnSiguiente.addEventListener("click", () => {
         posicionImagen++;
         if (posicionImagen >= producto.images.length) {

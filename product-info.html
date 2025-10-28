@@ -55,6 +55,30 @@
   </nav>
   <main>
     <div class="container" id="lista-productos">
+      <div class="detalles-producto">
+        <h2 id="nombreProducto" class="card-title-info"></h2>
+
+        <div style="display:flex; gap:70px; align-items:flex-start;">
+          <div id="carrusel-producto" style="width:500px; height:350px; overflow:visible; position:relative;">
+            <img id="imagenProducto" src="" style="width:100%; height:100%; object-fit:cover; border-radius:8px;">
+            <button id="btnSiguiente" type="button" style="position:absolute; top:50%; right:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+            <button id="btnAnterior" type="button" style="position:absolute; top:50%; left:-50px; transform:translateY(-50%); border:none; background-color:grey; padding:5px; cursor:pointer;">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+          </div>
+
+          <div style="flex:1; display:flex; flex-direction:column; gap:5px;">
+            <h3 id="precioProducto" class="card-price-info"></h3>
+            <p><strong>Descripción: </strong><span id="descripcionProducto"></span></p>
+            <p><strong>Categoría: </strong><span id="categoriaProducto"></span></p>
+            <p><strong>Cantidad de vendidos: </strong><span id="vendidosProducto"></span></p>
+          </div>
+        </div>
+      </div>
     </div>
     <!--pauta 2 de entrega 4-->
     <div class="container mt-4">
