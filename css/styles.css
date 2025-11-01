@@ -562,3 +562,12 @@ background-color: rgb(28, 101, 196);
   font-weight: normal !important;
   box-shadow: none !important; /* por si también cambian la sombra */
 }
+
+.page-link.bg-secondary {
+  box-shadow: none !important; /* Quita la sombra azul */
+}
+
+.page-link.bg-secondary:focus {
+  box-shadow: none !important; /* Quita la sombra al hacer click o tab */
+  outline: none; /* Quita el borde de foco */
+}

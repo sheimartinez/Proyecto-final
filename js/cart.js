@@ -55,9 +55,21 @@ document.addEventListener("DOMContentLoaded", () => {
             <button id="eliminar-${index}" class="btn text-primary p-0 mt-2" style="font-weight: bold;">Eliminar</button>
         </div>
 
-        <div class="col-md-4 mb-3">
-          <label for="cantidad-${index}" class="form-label"><strong>Cantidad:</strong></label>
-          <input type="number" id="cantidad-${index}" min="1" value="${cantidad}" class="form-control mx-auto w-50">
+        <div class="col-md-4 mb-3 text-center">
+          <label class="form-label d-block"><strong>Cantidad:</strong></label>
+          <nav aria-label="Selector de cantidad">
+            <ul class="pagination pagination-sm justify-content-center mb-0">
+              <li class="page-item">
+                <a class="page-link bg-secondary text-white" href="#" id="restar-${index}">−</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link bg-secondary text-white" href="#" id="cantidad-${index}" style="pointer-events:none;">${cantidad}</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link bg-secondary text-white" href="#" id="sumar-${index}">+</a>
+              </li>
+            </ul>
+          </nav>
         </div>
 
         <div class="col-md-4 mb-3">
@@ -73,22 +85,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
     listaCarrito.insertAdjacentHTML("beforeend", itemHTML);
 
-    // 🎯 Escuchar cambios en la cantidad
-    const inputCantidad = document.getElementById(`cantidad-${index}`);
+    const cantidadElemento = document.getElementById(`cantidad-${index}`);
+    const botonSumar = document.getElementById(`sumar-${index}`);
+    const botonRestar = document.getElementById(`restar-${index}`);
     const subtotalElemento = document.getElementById(`subtotal-${index}`);
 
-    inputCantidad.addEventListener("input", () => {
-      const nuevaCantidad = parseInt(inputCantidad.value);
-      const nuevoSubtotal = costoEnPesos * nuevaCantidad;
-      subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
-
+    botonSumar.addEventListener("click", (e) => {
+      e.preventDefault();
+      let nuevaCantidad = (carrito[index].cantidad || 1) + 1;
       carrito[index].cantidad = nuevaCantidad;
-      carrito[index].subtotal = nuevoSubtotal;
+      cantidadElemento.textContent = nuevaCantidad;
+      const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
+      subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
       localStorage.setItem("cartItems", JSON.stringify(carrito));
-
-      // Actualizar total del resumen
       actualizarResumen();
     });
+
+    botonRestar.addEventListener("click", (e) => {
+      e.preventDefault();
+      let nuevaCantidad = (carrito[index].cantidad || 1) - 1;
+      if (nuevaCantidad < 1) nuevaCantidad = 1;
+      carrito[index].cantidad = nuevaCantidad;
+      cantidadElemento.textContent = nuevaCantidad;
+      const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
+      subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
+      localStorage.setItem("cartItems", JSON.stringify(carrito));
+      actualizarResumen();
+    });
+
 
     // 🗑️ Eliminar producto individual
     const botonEliminar = document.getElementById(`eliminar-${index}`);
