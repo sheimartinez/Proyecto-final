@@ -263,4 +263,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const botonAgregar = document.getElementById("cart");
 
+  botonAgregar.addEventListener("click", () => {
+    // Obtenemos el carrito actual o lo creamos vacío
+    let carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
+
+    // Simulación: datos del producto actual (reemplazá esto con tus variables reales)
+    const producto = {
+      id: Date.now(), // id temporal (puedes usar el id real)
+      nombre: document.getElementById("nombreProducto").textContent,
+      precio: document.getElementById("precioProducto").textContent,
+      imagen: document.getElementById("imagenProducto").src
+    };
+
+    // Agregamos el producto al array
+    carrito.push(producto);
+
+    // Guardamos de nuevo en localStorage
+    localStorage.setItem("cartItems", JSON.stringify(carrito));
+
+    // Mostrar mensaje bonito
+    Swal.fire({
+      icon: "success",
+      title: "Producto agregado al carrito 🛒",
+      showConfirmButton: false,
+      timer: 1500
+    });
+  });
+});
