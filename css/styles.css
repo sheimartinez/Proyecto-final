@@ -555,3 +555,19 @@ body.modo-oscuro .jumbotron {
 #buy:hover {
 background-color: rgb(28, 101, 196);
 }
+
+/* Desactivar hover global solo dentro del carrito */
+.carrito-container .card:hover {
+  transform: none !important;
+  font-weight: normal !important;
+  box-shadow: none !important; /* por si también cambian la sombra */
+}
+
+.page-link.bg-secondary {
+  box-shadow: none !important; /* Quita la sombra azul */
+}
+
+.page-link.bg-secondary:focus {
+  box-shadow: none !important; /* Quita la sombra al hacer click o tab */
+  outline: none; /* Quita el borde de foco */
+}

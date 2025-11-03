@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (profileImages[usuario]) {
     img.src = profileImages[usuario];
   } else {
-    img.src = "img/default-profile.png"; // imagen por defecto, qun que no se le agrego aun
+    img.src = "img/default-profile.png";
   }
 
   input.addEventListener('change', function () {
