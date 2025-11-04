@@ -78,8 +78,13 @@ if (emailInput && usuarioEmail) {
       perfilGuardado[usuario] = datos;
       localStorage.setItem("perfilUsuario", JSON.stringify(perfilGuardado));
 
-      alert("Perfil guardado correctamente ✅");
-    });
+      Swal.fire({
+        icon: "success",
+        title: "Los cambios se han guardado correctamente",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      });
   }
 
 

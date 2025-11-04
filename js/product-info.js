@@ -152,33 +152,39 @@ function mostrarComentarios(comentarios){
 function mostrarRelacionados(relacionados) {
     const contenedor = document.getElementById("productos-relacionados");
 
-    let contenido = "";
+    contenedor.innerHTML = "";
 
     if (relacionados == null || relacionados.length === 0) {
-        contenido += `<p>No hay productos relacionados</p>`;
+        contenedor.innerHTML = `<p>No hay productos relacionados</p>`;
     } else {
-        for (let relacionado of relacionados) {
-            contenido += `
-            <div class="card mx-3" id="${relacionado.id}" style="cursor:pointer;">
-                <img src="${relacionado.image}" class="card-img">
-                <div class="card-info">
-                    <h3 class="card-title">${relacionado.name}</h3>
-                </div>
-            </div>
-            `;
-        }
+        relacionados.forEach(relacionado => {
+            getJSONData(PRODUCT_INFO_URL + relacionado.id + EXT_TYPE).then(resultado => {
+                if (resultado.status === "ok") {
+                    const productoRelacionado = resultado.data;
+                    
+                    contenedor.innerHTML += `
+                    <div class="card mx-3" id="${productoRelacionado.id}" style="cursor:pointer;">
+                    <img src="${productoRelacionado.images[0]}" class="card-img">
+                    <div class="card-info">
+                    <h3 class="card-title">${productoRelacionado.name}</h3>
+                    <p class="descripcion">${productoRelacionado.description}</p>
+                    <p class="precio" style="color: #28a745">${productoRelacionado.currency} ${productoRelacionado.cost}</p>
+                    </div>
+                    </div>
+                    `;
+                    let tarjetas = Array.from(contenedor.getElementsByClassName("card"));
+                    tarjetas.forEach(tarjeta => {
+                        tarjeta.addEventListener("click", () => {
+                            localStorage.setItem("productoSeleccionado", tarjeta.id);
+                            window.location.href = "product-info.html";
+                        });
+                    });
+                }
+            })
+        })
     }
-
-    contenedor.innerHTML += contenido;
-
-    let tarjetas = Array.from(contenedor.getElementsByClassName("card"));
-    tarjetas.forEach(tarjeta => {
-        tarjeta.addEventListener("click", () => {
-            localStorage.setItem("productoSeleccionado", tarjeta.id);
-            window.location.href = "product-info.html";
-        });
-    });
 }
+
 
 // desafiate
 let todasLasResenas = [];
