@@ -571,3 +571,8 @@ background-color: rgb(28, 101, 196);
   box-shadow: none !important; /* Quita la sombra al hacer click o tab */
   outline: none; /* Quita el borde de foco */
 }
+
+/*código para cambiar el color a la cantidad de productos del carrito*/
+#carritoCantidad {
+  color:#888;
+}

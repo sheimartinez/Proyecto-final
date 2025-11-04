@@ -4,6 +4,17 @@ document.addEventListener("DOMContentLoaded", () => {
   // Recuperamos el carrito desde localStorage
   const carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+  //parte del desafiate, cantidad de productos en el carrito
+  const contadorCarrito = document.getElementById("carritoCantidad");
+  if (contadorCarrito) {
+    if (carrito.length > 0) {
+      contadorCarrito.textContent = `(${carrito.length})`; //cambia o lee solo el texto dentro del elemento
+      contadorCarrito.style.display = "inline";
+    } else {
+      contadorCarrito.style.display = "none";
+    }
+  }
+
   // Si no hay productos
   if (carrito.length === 0) {
     contenidoCarrito.innerHTML = `
@@ -142,7 +153,7 @@ document.addEventListener("DOMContentLoaded", () => {
     resumenCarrito.innerHTML = `
     <div class="card">
       <div class="card-body">
-        <h3class="card-title mb-3">Resumen del carrito</h3>
+        <h3 class="card-title mb-3">Resumen del carrito</h3>
         <hr>
 
         <div class="d-flex justify-content-between">

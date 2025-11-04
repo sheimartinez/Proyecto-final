@@ -24,6 +24,33 @@ getJSONData(urlComentarios).then(function(resultado){
 });
 } //
 
+//función para la pauta Desafiate de la entrega 6
+function guardarProducto(producto){
+   const carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
+   
+   const productoGuardado = {
+    nombre: producto.name,
+    precio: producto.currency + " " + producto.cost,
+    imagen: producto.images[0],
+    cantidad: 1
+};
+
+   let existe = false //supongo que el carrito está vacío
+
+   carrito.forEach((producto) => {
+    if (producto.nombre === productoGuardado.nombre) {
+        producto.cantidad += 1;
+        existe = true;
+    }
+});
+
+if (!existe){
+    carrito.push(productoGuardado);
+}
+
+localStorage.setItem("cartItems", JSON.stringify(carrito)); //convierto el objeto a texto para el localStorage
+}
+
 //modificación de la función para el carrusel de la entrega 4
 function mostrarProducto(producto){
     const nombreProducto= document.getElementById("nombreProducto");
@@ -68,20 +95,12 @@ const buy = document.getElementById('buy')
 const cart = document.getElementById('cart')
 
 buy.addEventListener ('click', () => {
-    localStorage.setItem("nombreproducto", producto.name);
-    localStorage.setItem("costoproducto", producto.cost);
-    localStorage.setItem("monedaproducto", producto.currency);
-    localStorage.setItem("imagenproducto", producto.images[0]);
-
+    guardarProducto(producto);
     window.location.href="cart.html";
-})
+});
 
 cart.addEventListener ('click', () => {
-    localStorage.setItem("nombreproducto", producto.name);
-    localStorage.setItem("costoproducto", producto.cost);
-    localStorage.setItem("monedaproducto", producto.currency);
-    localStorage.setItem("imagenproducto", producto.images[0]);
-
+    guardarProducto(producto);
 
 //mensaje de exito
 Swal.fire({
@@ -92,7 +111,7 @@ Swal.fire({
   timer: 1500
 });
 
-})
+});
 
 }
 
@@ -261,35 +280,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if (formResena) {
         formResena.addEventListener('submit', manejarEnvioResena);
     }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const botonAgregar = document.getElementById("cart");
-
-  botonAgregar.addEventListener("click", () => {
-    // Obtenemos el carrito actual o lo creamos vacío
-    let carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
-
-    // Simulación: datos del producto actual (reemplazá esto con tus variables reales)
-    const producto = {
-      id: Date.now(), // id temporal (puedes usar el id real)
-      nombre: document.getElementById("nombreProducto").textContent,
-      precio: document.getElementById("precioProducto").textContent,
-      imagen: document.getElementById("imagenProducto").src
-    };
-
-    // Agregamos el producto al array
-    carrito.push(producto);
-
-    // Guardamos de nuevo en localStorage
-    localStorage.setItem("cartItems", JSON.stringify(carrito));
-
-    // Mostrar mensaje bonito
-    Swal.fire({
-      icon: "success",
-      title: "Producto agregado al carrito 🛒",
-      showConfirmButton: false,
-      timer: 1500
-    });
-  });
 });
