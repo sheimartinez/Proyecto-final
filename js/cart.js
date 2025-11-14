@@ -25,14 +25,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // 🔹 Creamos contenedor general con 2 columnas
-  contenidoCarrito.innerHTML = `
-    <div class="col-md-8 col-12" id="listaCarrito"></div>
-    <div class="col-md-4 col-12" id="resumenDeCarrito"></div>
-  `;
-
-  const listaCarrito = document.getElementById("listaCarrito");
-  const resumenCarrito = document.getElementById("resumenDeCarrito");
+  const listaCarrito = contenidoCarrito;
+  const resumenCarrito = document.getElementById("resumenCompra");
 
   // 🔁 Recorremos todos los productos del carrito
   carrito.forEach((producto, index) => {
@@ -179,11 +173,98 @@ document.addEventListener("DOMContentLoaded", () => {
             : ""
         }
 
-        <button class="btn btn-primary w-100 mt-3">Finalizar compra</button>
+        <button id="continuarCompraBtn" class="btn btn-primary w-100 mt-3">Continuar compra</button>
       </div>
     </div>
     `;
-  }
+  } ////cambié el nombre del botón a continuar compra y le añadí un id
 
   actualizarResumen();
+  
+  //parte 2 de entrega 6
+  document.getElementById("continuarCompraBtn").addEventListener("click", () => {
+  contenidoCarrito.innerHTML = "";
+  mostrarParte1();
+});
+
+//parte 2 de la entrega 6, funciones para mostrar los datos
+function mostrarParte1() {
+  const contenidoParte1 = `
+  <div id="parte1">
+    <div class="card-body">
+      <h4>1. Datos de envío</h4>
+      <div>
+       <input class="form-control mb-2" id="departamento" placeholder="Departamento">
+       <input class="form-control mb-2" id="localidad" placeholder="Localidad">
+       <input class="form-control mb-2" id="calle" placeholder="Calle">
+       <input class="form-control mb-2" id="numero" placeholder="Número">
+       <input class="form-control mb-2" id="esquina" placeholder="Esquina">
+      </div>
+      <div>
+       <h4>2. Tipo de envío</h4>
+        <div class="d-grid gap-2">
+          <button class="btnMarcado btn btn-outline-primary">Premium 2 a 5 días (15%)</button>
+          <button class="btnMarcado btn btn-outline-primary">Express 5 a 8 días (7%)</button>
+          <button class="btnMarcado btn btn-outline-primary">Standard 12 a 15 días (5%)</button>
+        </div>
+      </div>
+
+      <button id="continuarParte1" class="btn btn-primary mt-3">Continuar</button>
+    </div>
+  </div>
+  `;
+  contenidoCarrito.innerHTML = contenidoParte1;
+
+  // Evento para el botón de continuar
+  document.getElementById("continuarParte1").addEventListener("click", () => {
+    document.getElementById("continuarParte1").remove(); // quita el botón después de tocarlo
+    mostrarParte2();
+  });
+
+  const botonesParte1 = document.querySelectorAll(".btnMarcado");
+  botonesParte1.forEach(botoncito => {
+    botoncito.addEventListener("click", () => {
+      botonesParte1.forEach(botonesNo => botonesNo.classList.remove("active")); //le saco la clase a todos los botones
+      botoncito.classList.add("active"); //le pone la clase solo al botón que hice clik
+    });
+  });
+}
+
+function mostrarParte2(){
+  const contenidoParte2 = `
+  <div id="parte2">
+    <div class="card-body">
+      <h4>3. Forma de pago</h4>
+      <div class="formaPago">
+        <i class="fa-regular fa-credit-card"></i>
+        <span>Tarjeta de crédito</span>
+      </div>
+      <div class="formaPago">
+        <i class="fa-regular fa-credit-card"></i>
+        <span>Tarjeta de débito</span>
+      </div>
+      <div class="formaPago">
+        <i class="fa-solid fa-building-columns"></i>
+        <span>Transferencia Bancaria</span>
+      </div>
+      <div class="formaPago">
+        <i class="fa-solid fa-money-bill-wave"></i>
+        <span>Efectivo</span>
+      </div>
+
+      <button id="finalizarCompra" class="btn btn-success mt-3">Finalizar compra</button>
+    </div>
+  </div>
+  `;
+
+  contenidoCarrito.innerHTML = contenidoCarrito.innerHTML + contenidoParte2;
+
+  const metodoPago = document.querySelectorAll(".formaPago");
+  metodoPago.forEach(metodo => {
+    metodo.addEventListener("click", () => {
+      metodoPago.forEach(metodoNo => metodoNo.classList.remove("seleccionada"));
+      metodo.classList.add("seleccionada");
+    });
+  });
+}
 });

@@ -576,3 +576,27 @@ background-color: rgb(28, 101, 196);
 #carritoCantidad {
   color:#888;
 }
+
+#resumenCompra .card:hover {
+  transform: none !important;
+  font-weight: normal !important;
+  box-shadow: none !important; /* por si también cambian la sombra */
+}
+
+.formaPago {
+  border: 2px solid #dcdcdc;
+  padding: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  margin-top: 10px;
+}
+
+.formaPago:hover {
+  border-color: #007bff;
+}
+
+.formaPago.seleccionada {
+  border-color: #007bff;
+  background-color: #f3f9ff;
+}
