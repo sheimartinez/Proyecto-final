@@ -119,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    // 🗑️ Eliminar producto individual
+    // Eliminar producto individual
     const botonEliminar = document.getElementById(`eliminar-${index}`);
     botonEliminar.addEventListener("click", () => {
       carrito.splice(index, 1);
@@ -128,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // 💰 Mostrar resumen
+  //  Mostrar resumen
   function actualizarResumen() {
     let subtotalTotal = 0;
 
@@ -140,7 +140,8 @@ document.addEventListener("DOMContentLoaded", () => {
       subtotalTotal += precioEnPesos * cant;
     });
 
-    const envio = 0;
+    const porcentajeEnvio = parseInt(localStorage.getItem("porcentajeElegido")) || 0;
+    const envio = Math.round(subtotalTotal * (porcentajeEnvio / 100));
     const total = subtotalTotal + envio;
     const huboConversion = carrito.some(p => p.precio.startsWith("USD"));
 
@@ -157,11 +158,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="d-flex justify-content-between">
           <p class="mb-1">Envío:</p>
-          <p class="mb-1 text-success">GRATIS</p>
+          <p class="mb-1">UYU ${envio.toLocaleString()}</p>
         </div>
 
         <hr>
 
+        ${localStorage.getItem("envioTexto") ? `
+  <div class="d-flex justify-content-between">
+    <p class="mb-1">Tipo de envío:</p>
+    <p class="mb-1">${localStorage.getItem("envioTexto")}</p>
+  </div>
+` : ""}
         <div class="d-flex justify-content-between">
           <p class="mb-1 fw-bold">Total:</p>
           <p class="mb-1 fw-bold" id="total">UYU ${total.toLocaleString()}</p>
@@ -179,6 +186,14 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   } ////cambié el nombre del botón a continuar compra y le añadí un id
 
+document.querySelectorAll(".btnMarcado").forEach((botoncito) => {
+  botoncito.addEventListener("click", () => {
+    localStorage.setItem("porcentajeElegido", botoncito.dataset.porcentaje);
+    localStorage.setItem("envioTexto", botoncito.textContent.trim());
+    actualizarResumen();
+  });
+});
+
   actualizarResumen();
   
   //parte 2 de entrega 6
@@ -189,6 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //parte 2 de la entrega 6, funciones para mostrar los datos
 function mostrarParte1() {
+
   const contenidoParte1 = `
   <div id="parte1">
     <div class="card-body">
@@ -200,12 +216,19 @@ function mostrarParte1() {
        <input class="form-control mb-2" id="numero" placeholder="Número">
        <input class="form-control mb-2" id="esquina" placeholder="Esquina">
       </div>
+
       <div>
        <h4>2. Tipo de envío</h4>
         <div class="d-grid gap-2">
-          <button class="btnMarcado btn btn-outline-primary">Premium 2 a 5 días (15%)</button>
-          <button class="btnMarcado btn btn-outline-primary">Express 5 a 8 días (7%)</button>
-          <button class="btnMarcado btn btn-outline-primary">Standard 12 a 15 días (5%)</button>
+          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="15">
+            Premium 2 a 5 días (15%)
+          </button>
+          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="7">
+            Express 5 a 8 días (7%)
+          </button>
+          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="5">
+            Standard 12 a 15 días (5%)
+          </button>
         </div>
       </div>
 
@@ -213,21 +236,36 @@ function mostrarParte1() {
     </div>
   </div>
   `;
+
   contenidoCarrito.innerHTML = contenidoParte1;
 
-  // Evento para el botón de continuar
+  // evento para continuar
   document.getElementById("continuarParte1").addEventListener("click", () => {
-    document.getElementById("continuarParte1").remove(); // quita el botón después de tocarlo
+    document.getElementById("continuarParte1").remove();
     mostrarParte2();
   });
 
+  // seleccion de botones
   const botonesParte1 = document.querySelectorAll(".btnMarcado");
+
   botonesParte1.forEach(botoncito => {
     botoncito.addEventListener("click", () => {
-      botonesParte1.forEach(botonesNo => botonesNo.classList.remove("active")); //le saco la clase a todos los botones
-      botoncito.classList.add("active"); //le pone la clase solo al botón que hice clik
+
+      // le saco el active a todos
+      botonesParte1.forEach(btn => btn.classList.remove("active"));
+
+      // dejo señalado el que apreté
+      botoncito.classList.add("active");
+
+      // guardamos porcentaje y texto del envío
+      localStorage.setItem("porcentajeElegido", botoncito.dataset.porcentaje);
+      localStorage.setItem("envioTexto", botoncito.textContent.trim());
+
+      //  actualiza el resumen en tiempo real
+      actualizarResumen();
     });
   });
+
 }
 
 function mostrarParte2(){
