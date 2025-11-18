@@ -4,6 +4,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // Recuperamos el carrito desde localStorage
   const carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+  // Variable global para porcentaje de envío
+  let porcentajeEnvio = 0; // CAMBIO: Variable para guardar el porcentaje seleccionado
+
   //parte del desafiate, cantidad de productos en el carrito
   const contadorCarrito = document.getElementById("carritoCantidad");
   if (contadorCarrito) {
@@ -100,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
       subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
       localStorage.setItem("cartItems", JSON.stringify(carrito));
-      actualizarResumen();
+      actualizarResumen(porcentajeEnvio); // CAMBIO: Actualizar con porcentaje
     });
 
     botonRestar.addEventListener("click", (e) => {
@@ -112,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
       subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
       localStorage.setItem("cartItems", JSON.stringify(carrito));
-      actualizarResumen();
+      actualizarResumen(porcentajeEnvio); // CAMBIO: Actualizar con porcentaje
     });
 
     const botonEliminar = document.getElementById(`eliminar-${index}`);
@@ -123,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  function actualizarResumen() {
+  function actualizarResumen(porcentajeEnvioActual = 0) { // CAMBIO: Recibe porcentaje
     let subtotalTotal = 0;
 
     carrito.forEach((p) => {
@@ -134,8 +137,8 @@ document.addEventListener("DOMContentLoaded", () => {
       subtotalTotal += precioEnPesos * cant;
     });
 
-    const envio = 0;
-    const total = subtotalTotal + envio;
+    const costoEnvio = subtotalTotal * porcentajeEnvioActual; // CAMBIO
+    const total = subtotalTotal + costoEnvio; // CAMBIO
     const huboConversion = carrito.some(p => p.precio.startsWith("USD"));
 
     resumenCarrito.innerHTML = `
@@ -151,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="d-flex justify-content-between">
           <p class="mb-1">Envío:</p>
-          <p class="mb-1 text-success">GRATIS</p>
+          <p class="mb-1 text-success">UYU ${costoEnvio.toLocaleString()}</p>
         </div>
 
         <hr>
@@ -171,15 +174,18 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
     `;
+
+    // Volver a agregar listener al botón de continuar
+    const continuarBtn = document.getElementById("continuarCompraBtn");
+    if (continuarBtn) {
+      continuarBtn.addEventListener("click", () => {
+        document.getElementById("contenedor").innerHTML = "";
+        mostrarParte1();
+      });
+    }
   }
 
-  actualizarResumen();
-
-  document.getElementById("continuarCompraBtn").addEventListener("click", () => {
-    contenidoCarrito.innerHTML = "";
-    mostrarParte1();
-  });
-
+  actualizarResumen(porcentajeEnvio); // porcentaje inicia en 0
 
   // mostrar parte 1
   function mostrarParte1() {
@@ -245,12 +251,18 @@ document.addEventListener("DOMContentLoaded", () => {
       botoncito.addEventListener("click", () => {
         botonesParte1.forEach(b => b.classList.remove("active"));
         botoncito.classList.add("active");
+
+        // guardar el porcentaje dependiendo el metodo de envio 
+        if (botoncito.id === "Premium") porcentajeEnvio = 0.15;
+        if (botoncito.id === "Express") porcentajeEnvio = 0.07;
+        if (botoncito.id === "Standard") porcentajeEnvio = 0.05;
+
+        actualizarResumen(porcentajeEnvio); // CAMBIO: Actualizar resumen al seleccionar envío
       });
     });
   }
 
   // mostrar parte 2
-  
   function mostrarParte2() { 
     const contenidoParte2 = `
   <div id="parte2">
@@ -323,9 +335,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
- 
     // validar el pago
-    
     function validarPago() {
       const metodoElegido = document.querySelector(".formaPago.seleccionada");
       if (!metodoElegido) return false;
@@ -355,14 +365,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // validar las cantidades
-    
     function validarCantidades() {
       const carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
       return carrito.every(p => p.cantidad && p.cantidad > 0);
     }
 
     // finalizar compra
-    
     document.getElementById("finalizarCompra").addEventListener("click", () => {
       if (!validarCantidades()) {
         Swal.fire("Error", "Cada producto debe tener una cantidad válida.", "error");
@@ -377,9 +385,22 @@ document.addEventListener("DOMContentLoaded", () => {
       Swal.fire({
         icon: "success",
         title: "¡Compra realizada!",
-        text: "Su compra ha sido procesada con éxito."
+        text: `Su compra ha sido procesada con éxito.\nTotal: UYU ${calcularTotalFinal().toLocaleString()}`
       });
     });
+  }
 
+  // funcion para calcular total final considerando el envio
+  function calcularTotalFinal() {
+    let subtotalTotal = 0;
+    carrito.forEach((p) => {
+      const cant = p.cantidad || 1;
+      const precioOriginal = parseFloat(p.precio.split(" ")[1]);
+      const moneda = p.precio.split(" ")[0];
+      const precioEnPesos = moneda === "USD" ? precioOriginal * 40 : precioOriginal;
+      subtotalTotal += precioEnPesos * cant;
+    });
+    const costoEnvio = subtotalTotal * porcentajeEnvio;
+    return subtotalTotal + costoEnvio;
   }
 });
