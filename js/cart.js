@@ -115,8 +115,6 @@ document.addEventListener("DOMContentLoaded", () => {
       actualizarResumen();
     });
 
-
-    // Eliminar producto individual
     const botonEliminar = document.getElementById(`eliminar-${index}`);
     botonEliminar.addEventListener("click", () => {
       carrito.splice(index, 1);
@@ -125,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  //  Mostrar resumen
   function actualizarResumen() {
     let subtotalTotal = 0;
 
@@ -137,8 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       subtotalTotal += precioEnPesos * cant;
     });
 
-    const porcentajeEnvio = parseInt(localStorage.getItem("porcentajeElegido")) || 0;
-    const envio = Math.round(subtotalTotal * (porcentajeEnvio / 100));
+    const envio = 0;
     const total = subtotalTotal + envio;
     const huboConversion = carrito.some(p => p.precio.startsWith("USD"));
 
@@ -155,17 +151,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="d-flex justify-content-between">
           <p class="mb-1">Envío:</p>
-          <p class="mb-1">UYU ${envio.toLocaleString()}</p>
+          <p class="mb-1 text-success">GRATIS</p>
         </div>
 
         <hr>
 
-        ${localStorage.getItem("envioTexto") ? `
-  <div class="d-flex justify-content-between">
-    <p class="mb-1">Tipo de envío:</p>
-    <p class="mb-1">${localStorage.getItem("envioTexto")}</p>
-  </div>
-` : ""}
         <div class="d-flex justify-content-between">
           <p class="mb-1 fw-bold">Total:</p>
           <p class="mb-1 fw-bold" id="total">UYU ${total.toLocaleString()}</p>
@@ -183,14 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
     `;
   }
 
-document.querySelectorAll(".btnMarcado").forEach((botoncito) => {
-  botoncito.addEventListener("click", () => {
-    localStorage.setItem("porcentajeElegido", botoncito.dataset.porcentaje);
-    localStorage.setItem("envioTexto", botoncito.textContent.trim());
-    actualizarResumen();
-  });
-});
-
   actualizarResumen();
 
   document.getElementById("continuarCompraBtn").addEventListener("click", () => {
@@ -199,10 +181,10 @@ document.querySelectorAll(".btnMarcado").forEach((botoncito) => {
   });
 
 
-//parte 2 de la entrega 6, funciones para mostrar los datos
-function mostrarParte1() {
-
-  const contenidoParte1 = `
+  // mostrar parte 1
+  function mostrarParte1() {
+    const contenidoParte1 = `
+  <form id="parte1"> 
   <div id="parte1">
     <div class="card-body">
       <h4>1. Datos de envío</h4>
@@ -213,19 +195,12 @@ function mostrarParte1() {
        <input class="form-control mb-2" id="Numero" placeholder="Número" required>
        <input class="form-control mb-2" id="Esquina" placeholder="Esquina" required>
       </div>
-
       <div>
        <h4>2. Tipo de envío</h4>
         <div class="d-grid gap-2">
-          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="15">
-            Premium 2 a 5 días (15%)
-          </button>
-          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="7">
-            Express 5 a 8 días (7%)
-          </button>
-          <button class="btnMarcado btn btn-outline-primary" data-porcentaje="5">
-            Standard 12 a 15 días (5%)
-          </button>
+          <button type="button" class="btnMarcado btn btn-outline-primary" id="Premium">Premium 2 a 5 días (15%)</button>
+          <button type="button" class="btnMarcado btn btn-outline-primary" id="Express">Express 5 a 8 días (7%)</button>
+          <button type="button" class="btnMarcado btn btn-outline-primary" id="Standard">Standard 12 a 15 días (5%)</button>
         </div>
       </div>
 
@@ -235,36 +210,35 @@ function mostrarParte1() {
   </form>
   `;
 
-  contenidoCarrito.innerHTML = contenidoParte1;
+    document.getElementById("contenedor").innerHTML = contenidoParte1;
 
-  // evento para continuar
-  document.getElementById("continuarParte1").addEventListener("click", () => {
-    document.getElementById("continuarParte1").remove();
-    mostrarParte2();
-  });
+    function validarParte1() {
+      const departamento = document.getElementById("Departamento").value;
+      const localidad = document.getElementById("Localidad").value;
+      const calle = document.getElementById("Calle").value;
+      const numero = document.getElementById("Numero").value;
+      const esquina = document.getElementById("Esquina").value;
 
-  // seleccion de botones
-  const botonesParte1 = document.querySelectorAll(".btnMarcado");
+      if (!departamento || !localidad || !calle || !numero || !esquina) {
+        return false;
+      }
 
-  botonesParte1.forEach(botoncito => {
-    botoncito.addEventListener("click", () => {
+      const seleccionarEnvio = document.querySelector(".btnMarcado.active");
+      return seleccionarEnvio !== null;
+    }
 
-      // le saco el active a todos
-      botonesParte1.forEach(btn => btn.classList.remove("active"));
-
-      // dejo señalado el que apreté
-      botoncito.classList.add("active");
-
-      // guardamos porcentaje y texto del envío
-      localStorage.setItem("porcentajeElegido", botoncito.dataset.porcentaje);
-      localStorage.setItem("envioTexto", botoncito.textContent.trim());
-
-      //  actualiza el resumen en tiempo real
-      actualizarResumen();
+    document.getElementById("continuarParte1").addEventListener("click", () => {
+      if (validarParte1()) {
+        mostrarParte2();
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Algo salió mal!",
+          footer: "Por favor completa todos los campos y selecciona una forma de envío."
+        });
+      }
     });
-  });
-
-}
 
     const botonesParte1 = document.querySelectorAll(".btnMarcado");
     botonesParte1.forEach(botoncito => {
