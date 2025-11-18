@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const contadorCarrito = document.getElementById("carritoCantidad");
   if (contadorCarrito) {
     if (carrito.length > 0) {
-      contadorCarrito.textContent = `(${carrito.length})`; //cambia o lee solo el texto dentro del elemento
+      contadorCarrito.textContent = `(${carrito.length})`;
       contadorCarrito.style.display = "inline";
     } else {
       contadorCarrito.style.display = "none";
@@ -28,23 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
   const listaCarrito = contenidoCarrito;
   const resumenCarrito = document.getElementById("resumenCompra");
 
-  // 🔁 Recorremos todos los productos del carrito
   carrito.forEach((producto, index) => {
     const nombre = producto.nombre;
-    const precioTexto = producto.precio; // "USD 14500" o "UYU 2999"
+    const precioTexto = producto.precio;
     const moneda = precioTexto.split(" ")[0];
     const costo = parseFloat(precioTexto.split(" ")[1]);
     const imagen = producto.imagen;
     const cantidad = producto.cantidad || 1;
-    const costoEnPesos = moneda === "USD" ? costo * 40 : costo; // 💱 conversión
+    const costoEnPesos = moneda === "USD" ? costo * 40 : costo;
     const subtotal = costoEnPesos * cantidad;
 
-    // Guardamos la versión en pesos en el carrito
     carrito[index].moneda = "UYU";
     carrito[index].costoEnPesos = costoEnPesos;
     carrito[index].subtotal = subtotal;
 
-    // 🔸 Generamos la tarjeta del producto
     const itemHTML = `
 <div class="card mb-3 w-100">
   <div class="row g-0 align-items-center">
@@ -124,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
     botonEliminar.addEventListener("click", () => {
       carrito.splice(index, 1);
       localStorage.setItem("cartItems", JSON.stringify(carrito));
-      location.reload(); // recarga para actualizar la vista
+      location.reload();
     });
   });
 
@@ -184,7 +181,7 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
     </div>
     `;
-  } ////cambié el nombre del botón a continuar compra y le añadí un id
+  }
 
 document.querySelectorAll(".btnMarcado").forEach((botoncito) => {
   botoncito.addEventListener("click", () => {
@@ -195,12 +192,12 @@ document.querySelectorAll(".btnMarcado").forEach((botoncito) => {
 });
 
   actualizarResumen();
-  
-  //parte 2 de entrega 6
+
   document.getElementById("continuarCompraBtn").addEventListener("click", () => {
-  contenidoCarrito.innerHTML = "";
-  mostrarParte1();
-});
+    contenidoCarrito.innerHTML = "";
+    mostrarParte1();
+  });
+
 
 //parte 2 de la entrega 6, funciones para mostrar los datos
 function mostrarParte1() {
@@ -210,11 +207,11 @@ function mostrarParte1() {
     <div class="card-body">
       <h4>1. Datos de envío</h4>
       <div>
-       <input class="form-control mb-2" id="departamento" placeholder="Departamento">
-       <input class="form-control mb-2" id="localidad" placeholder="Localidad">
-       <input class="form-control mb-2" id="calle" placeholder="Calle">
-       <input class="form-control mb-2" id="numero" placeholder="Número">
-       <input class="form-control mb-2" id="esquina" placeholder="Esquina">
+       <input class="form-control mb-2" id="Departamento" placeholder="Departamento" required>
+       <input class="form-control mb-2" id="Localidad" placeholder="Localidad" required>
+       <input class="form-control mb-2" id="Calle" placeholder="Calle" required>
+       <input class="form-control mb-2" id="Numero" placeholder="Número" required>
+       <input class="form-control mb-2" id="Esquina" placeholder="Esquina" required>
       </div>
 
       <div>
@@ -232,9 +229,10 @@ function mostrarParte1() {
         </div>
       </div>
 
-      <button id="continuarParte1" class="btn btn-primary mt-3">Continuar</button>
+      <button id="continuarParte1" class="btn btn-primary mt-3" type="button">Continuar</button>
     </div>
   </div>
+  </form>
   `;
 
   contenidoCarrito.innerHTML = contenidoParte1;
@@ -268,41 +266,146 @@ function mostrarParte1() {
 
 }
 
-function mostrarParte2(){
-  const contenidoParte2 = `
+    const botonesParte1 = document.querySelectorAll(".btnMarcado");
+    botonesParte1.forEach(botoncito => {
+      botoncito.addEventListener("click", () => {
+        botonesParte1.forEach(b => b.classList.remove("active"));
+        botoncito.classList.add("active");
+      });
+    });
+  }
+
+  // mostrar parte 2
+  
+  function mostrarParte2() { 
+    const contenidoParte2 = `
   <div id="parte2">
     <div class="card-body">
       <h4>3. Forma de pago</h4>
-      <div class="formaPago">
+
+      <div class="formaPago" data-tipo="credito">
         <i class="fa-regular fa-credit-card"></i>
         <span>Tarjeta de crédito</span>
       </div>
-      <div class="formaPago">
+
+      <div class="formaPago" data-tipo="debito">
         <i class="fa-regular fa-credit-card"></i>
         <span>Tarjeta de débito</span>
       </div>
-      <div class="formaPago">
+
+      <div class="formaPago" data-tipo="transferencia">
         <i class="fa-solid fa-building-columns"></i>
         <span>Transferencia Bancaria</span>
       </div>
-      <div class="formaPago">
+
+      <div class="formaPago" data-tipo="efectivo">
         <i class="fa-solid fa-money-bill-wave"></i>
         <span>Efectivo</span>
       </div>
 
+      <div id="inputsPago" class="mt-3"></div>
+
       <button id="finalizarCompra" class="btn btn-success mt-3">Finalizar compra</button>
     </div>
   </div>
-  `;
+  `; 
 
-  contenidoCarrito.innerHTML = contenidoCarrito.innerHTML + contenidoParte2;
+    document.getElementById("contenedor").innerHTML = contenidoParte2;
 
-  const metodoPago = document.querySelectorAll(".formaPago");
-  metodoPago.forEach(metodo => {
-    metodo.addEventListener("click", () => {
-      metodoPago.forEach(metodoNo => metodoNo.classList.remove("seleccionada"));
-      metodo.classList.add("seleccionada");
+    const metodoPago = document.querySelectorAll(".formaPago");
+    const inputsPagoDiv = document.getElementById("inputsPago");
+
+    // mostrar los inputs segun el metodo de pago
+    metodoPago.forEach(metodo => {
+      metodo.addEventListener("click", () => {
+        metodoPago.forEach(m => m.classList.remove("seleccionada"));
+        metodo.classList.add("seleccionada");
+
+        const tipo = metodo.dataset.tipo;
+
+        if (tipo === "credito" || tipo === "debito") {
+          inputsPagoDiv.innerHTML = `
+            <h5>Datos de tarjeta</h5>
+            <input id="numTarjeta" class="form-control mb-2" placeholder="Número de tarjeta">
+            <input id="vencimiento" class="form-control mb-2" placeholder="MM/AA">
+            <input id="cvc" class="form-control mb-2" placeholder="CVC">
+          `;
+        }
+
+        if (tipo === "transferencia") {
+          inputsPagoDiv.innerHTML = `
+            <h5>Transferencia Bancaria</h5>
+            <input id="cuenta" class="form-control mb-2" placeholder="Número de cuenta">
+          `;
+        }
+
+        if (tipo === "efectivo") {
+          inputsPagoDiv.innerHTML = `
+            <h5>Pago en efectivo</h5>
+            <input id="nombre" class="form-control mb-2" placeholder="Nombre completo">
+            <input id="documento" class="form-control mb-2" placeholder="Documento">
+          `;
+        }
+      });
     });
-  });
-}
+
+ 
+    // validar el pago
+    
+    function validarPago() {
+      const metodoElegido = document.querySelector(".formaPago.seleccionada");
+      if (!metodoElegido) return false;
+
+      const tipo = metodoElegido.dataset.tipo;
+
+      if (tipo === "credito" || tipo === "debito") {
+        return (
+          document.getElementById("numTarjeta").value.trim() !== "" &&
+          document.getElementById("vencimiento").value.trim() !== "" &&
+          document.getElementById("cvc").value.trim() !== ""
+        );
+      }
+
+      if (tipo === "transferencia") {
+        return document.getElementById("cuenta").value.trim() !== "";
+      }
+
+      if (tipo === "efectivo") {
+        return (
+          document.getElementById("nombre").value.trim() !== "" &&
+          document.getElementById("documento").value.trim() !== ""
+        );
+      }
+
+      return false;
+    }
+
+    // validar las cantidades
+    
+    function validarCantidades() {
+      const carrito = JSON.parse(localStorage.getItem("cartItems")) || [];
+      return carrito.every(p => p.cantidad && p.cantidad > 0);
+    }
+
+    // finalizar compra
+    
+    document.getElementById("finalizarCompra").addEventListener("click", () => {
+      if (!validarCantidades()) {
+        Swal.fire("Error", "Cada producto debe tener una cantidad válida.", "error");
+        return;
+      }
+
+      if (!validarPago()) {
+        Swal.fire("Error", "Complete correctamente los datos del método de pago.", "error");
+        return;
+      }
+
+      Swal.fire({
+        icon: "success",
+        title: "¡Compra realizada!",
+        text: "Su compra ha sido procesada con éxito."
+      });
+    });
+
+  }
 });
