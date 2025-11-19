@@ -175,19 +175,16 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
     `;
 
-    // Volver a agregar listener al botón de continuar
-    const continuarBtn = document.getElementById("continuarCompraBtn");
-    if (continuarBtn) {
-      continuarBtn.addEventListener("click", () => {
-        document.getElementById("contenedor").innerHTML = "";
-        mostrarParte1();
-      });
-    }
+    // parte 2 de la entrega 7, listener al botón de continuar
+    document.getElementById("continuarCompraBtn").addEventListener("click", () => {
+      contenidoCarrito.innerHTML = "";
+      mostrarParte1();
+    });
   }
 
   actualizarResumen(porcentajeEnvio); // porcentaje inicia en 0
 
-  // mostrar parte 1
+  // parte 2 de la entrega 7
   function mostrarParte1() {
     const contenidoParte1 = `
   <form id="parte1"> 
@@ -216,6 +213,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </form>
   `;
 
+  //parte 4 de la entrega 7 
     document.getElementById("contenedor").innerHTML = contenidoParte1;
 
     function validarParte1() {
@@ -246,11 +244,12 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
+    //parte 2 de la entrega 7
     const botonesParte1 = document.querySelectorAll(".btnMarcado");
     botonesParte1.forEach(botoncito => {
       botoncito.addEventListener("click", () => {
-        botonesParte1.forEach(b => b.classList.remove("active"));
-        botoncito.classList.add("active");
+        botonesParte1.forEach(botonesNo => botonesNo.classList.remove("active"));
+        botoncito.classList.add("active"); //hasta acá
 
         // guardar el porcentaje dependiendo el metodo de envio 
         if (botoncito.id === "Premium") porcentajeEnvio = 0.15;
@@ -262,7 +261,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // mostrar parte 2
+  // parte 2 de entrega 7
   function mostrarParte2() { 
     const contenidoParte2 = `
   <div id="parte2">
@@ -295,6 +294,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </div>
   </div>
   `; 
+//hasta acá
 
     document.getElementById("contenedor").innerHTML = contenidoParte2;
 
@@ -386,7 +386,10 @@ document.addEventListener("DOMContentLoaded", () => {
         icon: "success",
         title: "¡Compra realizada!",
         text: `Su compra ha sido procesada con éxito.\nTotal: UYU ${calcularTotalFinal().toLocaleString()}`
-      });
+      }).then(() => { //detalle de volver al carrito despúes de finalizar la compra y que se vacíe.
+        localStorage.removeItem("cartItems");
+        window.location.href = "cart.html";
+      })
     });
   }
 
