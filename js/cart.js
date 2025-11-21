@@ -79,7 +79,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         <div class="col-md-4 mb-3">
           <p><strong>Precio:</strong><br>UYU ${costoEnPesos.toLocaleString()}</p>
-          <p><strong>Subtotal:</strong><br><span id="subtotal-${index}">UYU ${subtotal.toLocaleString()}</span></p>
         </div>
 
       </div>
@@ -93,15 +92,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const cantidadElemento = document.getElementById(`cantidad-${index}`);
     const botonSumar = document.getElementById(`sumar-${index}`);
     const botonRestar = document.getElementById(`restar-${index}`);
-    const subtotalElemento = document.getElementById(`subtotal-${index}`);
 
     botonSumar.addEventListener("click", (e) => {
       e.preventDefault();
       let nuevaCantidad = (carrito[index].cantidad || 1) + 1;
       carrito[index].cantidad = nuevaCantidad;
       cantidadElemento.textContent = nuevaCantidad;
-      const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
-      subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
       localStorage.setItem("cartItems", JSON.stringify(carrito));
       actualizarResumen(porcentajeEnvio); // CAMBIO: Actualizar con porcentaje
     });
@@ -112,8 +108,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (nuevaCantidad < 1) nuevaCantidad = 1;
       carrito[index].cantidad = nuevaCantidad;
       cantidadElemento.textContent = nuevaCantidad;
-      const nuevoSubtotal = carrito[index].costoEnPesos * nuevaCantidad;
-      subtotalElemento.textContent = `UYU ${nuevoSubtotal.toLocaleString()}`;
       localStorage.setItem("cartItems", JSON.stringify(carrito));
       actualizarResumen(porcentajeEnvio); // CAMBIO: Actualizar con porcentaje
     });
@@ -144,16 +138,17 @@ document.addEventListener("DOMContentLoaded", () => {
     resumenCarrito.innerHTML = `
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title mb-3">Resumen del carrito</h3>
+        <h3 class="card-title mb-3 text-center">Resumen de Compra</h3>
         <hr>
 
         <div class="d-flex justify-content-between">
-          <p class="mb-1">Productos (${carrito.length}):</p>
+          <p class="mb-1 fw-bold">Subtotal:</p>
           <p class="mb-1">UYU ${subtotalTotal.toLocaleString()}</p>
         </div>
+        <br>
 
         <div class="d-flex justify-content-between">
-          <p class="mb-1">Envío:</p>
+          <p class="mb-1 fw-bold">Envío:</p>
           <p class="mb-1 text-success">UYU ${costoEnvio.toLocaleString()}</p>
         </div>
 
