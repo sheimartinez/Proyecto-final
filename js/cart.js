@@ -183,7 +183,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function mostrarParte1() {
     const contenidoParte1 = `
   <form id="parte1"> 
-  <div id="parte1">
+  <div id="partede1">
     <div class="card-body">
       <h4>1. Datos de envío</h4>
       <div>
