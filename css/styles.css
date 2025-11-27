@@ -600,3 +600,32 @@ background-color: rgb(28, 101, 196);
   border-color: #007bff;
   background-color: #f3f9ff;
 }
+
+/*estilo para los botones de subir y eliminar imagen en el perfil*/
+#btnImagen,
+#eliminarImagen{
+  background: none;
+  border: none;
+  cursor: pointer;
+  color:#888;
+}
+
+#btnImagen:hover,
+#eliminarImagen:hover{
+  color:#555;
+}
+
+.modo-oscuro .formaPago.seleccionada{
+  background-color: #888;
+}
+
+body:not(.modo-oscuro) .btn-group .btn-outline-light {
+  color: #000;
+  border-color: #000;
+}
+
+/* Hover elegante */
+body:not(.modo-oscuro) .btn-group .btn-outline-light:hover {
+  background-color:#a19e9e;
+  color:white;
+}

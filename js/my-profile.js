@@ -2,6 +2,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const img = document.getElementById('profile-img');
   const input = document.getElementById('file-input');
   const logoutBtn = document.getElementById("logout-btn");
+  const botonImagen = document.getElementById("btnImagen");
+  const eliminarImagen = document.getElementById("eliminarImagen");
+
+if (eliminarImagen){
+  eliminarImagen.addEventListener("click", () => {
+    img.src = "img/default-profile.png";
+
+    delete profileImages[usuario];
+    localStorage.setItem("profileImages", JSON.stringify(profileImages));
+  })
+}
 
   const usuario = localStorage.getItem("usuarioLogeado");
   if (!usuario) {
@@ -16,6 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
   } else {
     img.src = "img/default-profile.png";
   }
+
+  botonImagen.addEventListener("click", () => {
+    input.click();
+  });
 
   input.addEventListener('change', function () {
     const file = this.files[0];

@@ -41,8 +41,6 @@
         }
 
         .profile-container {
-            max-width: 600px;
-            margin: 0 auto;
             padding: 0 1rem;
         }
 
@@ -56,15 +54,10 @@
         }
 
         #profile-form {
-            background: #dfb2e0;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
             margin-top: 2rem;
         }
 
         #profile-form h2 {
-            color: #8b7d6b;
             margin-bottom: 1.5rem;
             font-weight: 300;
             font-size: 1.5rem;
@@ -74,7 +67,6 @@
         #profile-form label {
             display: block;
             margin-bottom: 0.5rem;
-            color: #a39e93;
             font-size: 0.9rem;
             font-weight: 400;
         }
@@ -98,28 +90,25 @@
         }
 
         #profile-form input[readonly] {
-            background-color: #f5f2ee;
             color: #87929a;
         }
 
-        #profile-form button,
         #logout-btn {
-            width: 100%;
-            padding: 0.85rem;
-            background: #d4c8b8;
-            color: #7a6f5f;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background 0.2s ease;
-            margin-top: 1rem;
+          background-color: rgb(234, 53, 53);
+          color:white;
+          width: auto;
+          padding: 0.80rem;
+          border: none;
+          border-radius: 8px;
+          font-size: 0.95rem;
+          font-weight: 500;
+          cursor: pointer;
+          margin-top: 1rem;
+          margin-left: 419px;
         }
 
-        #profile-form button:hover,
-        #logout-btn:hover {
-            background: #c8bbaa;
+        #logout-btn:hover{
+          background-color: rgb(189, 0, 0);
         }
 
         .rounded-circle {
@@ -138,6 +127,30 @@
             background-color: #f8f9fa;
             padding: 2rem 0;
             border-top: 1px solid #e1dcd5;
+        }
+
+        #profile-form #cambios {
+          background-color: #007bff;
+          color: white;
+          border-radius: 8px;
+          cursor: pointer;
+          width: auto;
+          margin: 0.98rem;
+          transition: background-color 0.2s ease;
+        }
+        
+        #profile-form #cambios:hover {
+          background-color: #0158ca;
+        }
+
+        #cambios { 
+          padding: 0.80rem;
+          border: none;
+          transform: translateX(-15px);
+        }
+
+        #profile-form {
+          margin-top: -20px;
         }
     </style>
 </head>
@@ -193,31 +206,53 @@
   <main>
         
         <main>
-          <div class="container mt-5 text-center">
-            <h2>Mi Perfil</h2>
+          <div class="container mt-5">
+            <div class="row">
+              <div class="col-md-5 text-center">
+            <h2><strong>Mi Perfil</strong></h2>
             <div class="mt-3">
-              <img id="profile-img" src="img/default-profile.png" alt="Imagen de perfil" class="rounded-circle border" width="150" height="150" style="object-fit: cover;">
+              <img id="profile-img" src="img/default-profile.png" alt="Imagen de perfil" class="rounded-circle border" width="200" height="200" style="object-fit: cover;">
             </div>
             <div class="mt-3">
-              <input type="file" id="file-input" accept="image/*" class="form-control w-50 mx-auto">
+              <button type="button" id="btnImagen">Selecciona tu imagen</button>
+              <input type="file" id="file-input" accept="image/*" style="display: none;">
             </div>
-            <p class="text-muted mt-2">Selecciona una imagen para tu perfil.</p>
+            <div class="mt-3">
+              <button type="button" id="eliminarImagen">Eliminar imagen</button>
+            </div>
           </div>
           <!-- PARTE 4 ENTREGA 5-->
+           <div class="col-md-7">
             <form id="profile-form">
+              <div class="mb-3">
                 <label for="email">Email</label>
-                <input type="email" id="usuario" readonly>
+                <input type="email" id="usuario" readonly class="form-control">
+              </div>
 
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" required>
+              <div class="mb-3">
+                <label for="nombre">Nombre*</label>
+                <input type="text" id="nombre" required class="form-control">
+              </div>
 
-                <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" required>
+              <div class="mb-3">
+                <label for="apellido">Apellido*</label>
+                <input type="text" id="apellido" required class="form-control">
+              </div>
 
-                <button type="submit">Guardar cambios</button>
+              <div class="mb-3">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label for="contacto">Número de teléfono</label>
+                <input type="text" id="contacto" class="form-control">
+              </div>
+                <button type="submit" id="cambios" class="mt-2">Guardar cambios</button>
+                <button id="logout-btn">Cerrar sesión</button>
             </form>
-
-            <button id="logout-btn" class="btn btn-danger mt-3">Cerrar sesión</button>
+           </div>
+         </div>
         </div>
     </main>
 
