@@ -624,8 +624,32 @@ body:not(.modo-oscuro) .btn-group .btn-outline-light {
   border-color: #000;
 }
 
-/* Hover elegante */
 body:not(.modo-oscuro) .btn-group .btn-outline-light:hover {
   background-color:#a19e9e;
   color:white;
+}
+
+/*index resonsive*/
+@media (max-width: 576px) /*pantallas chicas*/ {
+  #carruselCategorias {
+    overflow: hidden;
+  }
+
+  #carruselCategorias .carousel-control-prev {
+    left: 0;
+  }
+
+  #carruselCategorias .carousel-control-next {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px)/*tipo tablet*/ {
+  #carruselCategorias .carousel-control-prev {
+    left: 0;
+  }
+
+  #carruselCategorias .carousel-control-next {
+    right: 0;
+  }
 }
