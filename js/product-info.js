@@ -4,7 +4,7 @@ const productoId= localStorage.getItem("productoSeleccionado");
 if (!productoId){
     alert("No has seleccionado ningún producto");
 } else{
-    const urlProducto= PRODUCT_INFO_URL + productoId + EXT_TYPE;
+    const urlProducto= PRODUCT_INFO_URL + "/" + productoId;
                         
 
     getJSONData(urlProducto).then(function(resultado){
@@ -15,7 +15,7 @@ if (!productoId){
             }); 
 
 //parte 2 de entrega 4
-const urlComentarios= PRODUCT_INFO_COMMENTS_URL + productoId + EXT_TYPE;
+const urlComentarios= PRODUCT_INFO_COMMENTS_URL + "/" + productoId;
 getJSONData(urlComentarios).then(function(resultado){
     if (resultado.status === "ok"){
         console.log("Comentarios cargados", resultado.data);
@@ -158,7 +158,7 @@ function mostrarRelacionados(relacionados) {
         contenedor.innerHTML = `<p>No hay productos relacionados</p>`;
     } else {
         relacionados.forEach(relacionado => {
-            getJSONData(PRODUCT_INFO_URL + relacionado.id + EXT_TYPE).then(resultado => {
+            getJSONData(PRODUCT_INFO_URL + "/" + relacionado.id).then(resultado => {
                 if (resultado.status === "ok") {
                     const productoRelacionado = resultado.data;
                     
