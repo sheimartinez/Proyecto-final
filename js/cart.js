@@ -378,6 +378,17 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      //parte del fetch del desafiate de la entrega 8.
+      fetch("http://localhost:3000/cart", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(carrito)
+      }).then(res => res.json())
+      .then(data => {
+        console.log("Carrito enviado correctamente:", data);
+
       Swal.fire({
         icon: "success",
         title: "¡Compra realizada!",
@@ -385,9 +396,14 @@ document.addEventListener("DOMContentLoaded", () => {
       }).then(() => { //detalle de volver al carrito despúes de finalizar la compra y que se vacíe.
         localStorage.removeItem("cartItems");
         window.location.href = "cart.html";
-      })
+      });
+    })
+    .catch(error => {
+      console.error("Error al enviar el carrito:", error);
+      Swal.fire("Error", "No se pudo realizar la compra en el servidor.", "error");
     });
-  }
+  });
+}
 
   // funcion para calcular total final considerando el envio
   function calcularTotalFinal() {
