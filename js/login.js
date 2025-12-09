@@ -27,8 +27,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     return;
 }
-localStorage.setItem("usuarioLogeado", usuario.value); // esta parte me re complico porue era lo que faltaba para ir al index.html nuevamente
 
-window.location.href = "index.html";
+fetch("http://localhost:3000/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+        usuario: usuario.value,
+        password: password.value
+    })
+})
+.then(res => res.json())
+.then(data => {
+    if (!data.token) {
+        Swal.fire({
+            icon: "error",
+            title: "Error",
+            text: data.mensaje
+        });
+        return;
+    }
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("usuarioLogeado", usuario.value); // esta parte me re complico porue era lo que faltaba para ir al index.html nuevamente
+    window.location.href = "index.html";
+})
+.catch(error => {
+    console.error("Error:", error);
+});
 });
 });

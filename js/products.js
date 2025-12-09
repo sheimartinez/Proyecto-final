@@ -155,17 +155,26 @@ tarjetas.forEach(tarjeta => {
 }
 
 const categoriaID = localStorage.getItem("catID");
-const urlProductos = `https://japceibal.github.io/emercado-api/cats_products/${categoriaID}.json`;
+const token = localStorage.getItem("token");
+const urlProductos = `http://localhost:3000/cats_products/${categoriaID}`;
 
-getJSONData(urlProductos).then(function(resultado){
-  if (resultado.status === "ok") {
-    productos = resultado.data.products;
-    mostrarProductos(productos);
-    const cat = document.getElementById("textoCategoria");
-    cat.innerHTML = `
-    Aquí verás todos los productos disponibles de la categoría ${resultado.data.catName}`;//para que aparezca la categoría en el párrafo abajo del título
-  }
-});
+if (categoriaID && token) {
+    fetch(urlProductos, {
+        headers: { "Authorization": `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+        productos = data.products;
+        productosFiltrados = [...productos];
+        mostrarProductos(productos);
+
+        const texto = document.getElementById("textoCategoria");
+        if(texto) texto.innerHTML = `Aquí verás todos los productos disponibles de la categoría ${data.catName}`;
+    })
+    .catch(error => 
+        console.error("Error al cargar los productos:", error)
+    );
+}
 
 const buscar= document.getElementsByClassName("barraBuscador");
 
